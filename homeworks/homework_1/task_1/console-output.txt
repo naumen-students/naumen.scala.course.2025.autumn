@@ -1,0 +1,47 @@
+PS C:\Users\apune> scala
+Welcome to Scala 2.12.10 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_401).
+Type in expressions for evaluation. Or try :help.
+
+scala> val myName = "Alexey Punenko"
+myName: String = Alexey Punenko
+
+scala> def msg(greet: String, who: String): String = s"$greet, Scala!, This is $who"
+msg: (greet: String, who: String)String
+
+scala> var greet = "Hello"
+greet: String = Hello
+
+scala> println(msg(greet, myName))
+Hello, Scala!, This is Alexey Punenko
+
+scala> greet = "Hola"
+greet: String = Hola
+
+scala> println(msg(greet, myName))
+Hola, Scala!, This is Alexey Punenko
+
+scala> greet = "Guten tag"
+greet: String = Guten tag
+
+scala> println(msg(greet, myName))
+Guten tag, Scala!, This is Alexey Punenko
+
+scala> val names = List("John Smith", "Cayde-6", "Big Boss")
+names: List[String] = List(John Smith, Cayde-6, Big Boss)
+
+scala> def reverseName(name: String): String = name.reverse
+reverseName: (name: String)String
+
+scala> val greetings = List("Hello", "Hola", "Guten tag")
+greetings: List[String] = List(Hello, Hola, Guten tag)
+
+scala> for (g <- greetings; n <- names) println(msg(g, reverseName(n)))
+Hello, Scala!, This is htimS nhoJ
+Hello, Scala!, This is 6-edyaC
+Hello, Scala!, This is ssoB giB
+Hola, Scala!, This is htimS nhoJ
+Hola, Scala!, This is 6-edyaC
+Hola, Scala!, This is ssoB giB
+Guten tag, Scala!, This is htimS nhoJ
+Guten tag, Scala!, This is 6-edyaC
+Guten tag, Scala!, This is ssoB giB
