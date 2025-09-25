@@ -1,0 +1,49 @@
+D:\scala_course\hello-scala>sbt console
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by scala.runtime.LazyVals$ (file:/C:/Users/User/AppData/Local/Coursier/cache/arc/https/github.com/sbt/sbt/releases/download/v1.11.6/sbt-1.11.6.zip/sbt/bin/sbt-launch.jar)
+WARNING: Please consider reporting this to the maintainers of class scala.runtime.LazyVals$
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by scala.runtime.LazyVals$ (file:/C:/Users/User/AppData/Local/Coursier/cache/arc/https/github.com/sbt/sbt/releases/download/v1.11.6/sbt-1.11.6.zip/sbt/bin/sbt-launch.jar)
+WARNING: Please consider reporting this to the maintainers of class scala.runtime.LazyVals$
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by com.sun.jna.Native in an unnamed module (file:/C:/Users/User/.sbt/boot/scala-2.12.20/org.scala-sbt/sbt/1.11.6/jna-5.12.0.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+[info] welcome to sbt 1.11.6 (Eclipse Adoptium Java 25)
+[info] loading project definition from D:\scala_course\hello-scala\project
+[info] loading settings for project root from build.sbt...
+[info] set current project to hello-scala (in build file:/D:/scala_course/hello-scala/)
+Welcome to Scala 3.7.3 (25, Java OpenJDK 64-Bit Server VM).
+Type in expressions for evaluation. Or try :help.
+
+scala> val name = "Anna Zamyslova"
+val name: String = Anna Zamyslova
+
+scala> val greetings = Seq("Hello", "Hola", "Guten tag")
+val greetings: Seq[String] = List(Hello, Hola, Guten tag)
+
+scala> val reversedName = name.reverse
+val reversedName: String = avolsymaZ annA
+
+scala>
+
+scala> for (g <- greetings) {
+     |   println(s"$g, Scala! It's $name")
+     | }
+Hello, Scala! It's Anna Zamyslova
+Hola, Scala! It's Anna Zamyslova
+Guten tag, Scala! It's Anna Zamyslova
+
+scala>
+
+scala> for (g <- greetings) {
+     |   println(s"$g, Scala! It's $reversedName")
+     | }
+Hello, Scala! It's avolsymaZ annA
+Hola, Scala! It's avolsymaZ annA
+Guten tag, Scala! It's avolsymaZ annA
+
+scala>
