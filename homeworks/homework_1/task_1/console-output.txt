@@ -1,0 +1,27 @@
+PS C:\Users\haier> scala
+Welcome to Scala 2.12.10 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_461).
+Type in expressions for evaluation. Or try :help.
+
+scala> val name = "Амир"
+name: String = Амир
+
+scala> val greeting = s"Привет, Скала! Это $name"
+greeting: String = Привет, Скала! Это Амир
+
+scala> val greetingHola = greeting.replace("Привет", "Hola")
+greetingHola: String = Hola, Скала! Это Амир
+
+scala> val greetingHi = greeting.replace("Привет", "Hi")
+greetingHi: String = Hi, Скала! Это Амир
+
+scala> val reversedName = name.reverse
+reversedName: String = римА
+
+scala> var reversedGreeing = greeting.replace(name, name.reverse)
+reversedGreeing: String = Привет, Скала! Это римА
+
+scala> var reversedGreetingHola = greeting.replace("Привет", "Hola").replace(name, name.reverse)
+reversedGreetingHola: String = Hola, Скала! Это римА
+
+scala> var reversedGreeingHi = greetingHi.replace(name, name.reverse)
+reversedGreeingHi: String = Hi, Скала! Это римА
