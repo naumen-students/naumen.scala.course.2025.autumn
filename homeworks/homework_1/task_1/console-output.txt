@@ -1,0 +1,29 @@
+PS C:\Users\Acer> scala
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by scala.runtime.LazyVals$ (file:/C:/Users/Acer/AppData/Local/Coursier/cache/arc/https/github.com/scala/scala3/releases/download/3.7.3/scala3-3.7.3-x86_64-pc-win32.zip/scala3-3.7.3-x86_64-pc-win32/maven2/org/scala-lang/scala3-library_3/3.7.3/scala3-library_3-3.7.3.jar)
+WARNING: Please consider reporting this to the maintainers of class scala.runtime.LazyVals$
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+Welcome to Scala 3.7.3 (24.0.2, Java Java HotSpot(TM) 64-Bit Server VM).
+Type in expressions for evaluation. Or try :help.
+
+scala> def writeInConsoleGreeting(welcomeSpeech: String, name: String) = println(s"$welcomeSpeech Scala! This is $name")
+
+def writeInConsoleGreeting(welcomeSpeech: String, name: String): Unit
+
+scala> writeInConsoleGreeting("Hello", "Stas")
+Hello Scala! This is Stas
+
+scala> writeInConsoleGreeting("Hola", "Stas")
+Hola Scala! This is Stas
+
+scala> writeInConsoleGreeting("Guten tag", "Stas")
+Guten tag Scala! This is Stas
+
+scala> writeInConsoleGreeting("Hello", "Stas".reverse)
+Hello Scala! This is satS
+
+scala> writeInConsoleGreeting("Hola", "Stas".reverse)
+Hola Scala! This is satS
+
+scala> writeInConsoleGreeting("Guten tag", "Stas".reverse)
+Guten tag Scala! This is satS
