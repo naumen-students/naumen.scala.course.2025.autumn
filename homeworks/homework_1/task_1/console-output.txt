@@ -1,0 +1,77 @@
+
+C:\Users\VVK>scala
+Welcome to Scala 2.12.10 (OpenJDK 64-Bit Server VM, Java 11.0.28).
+Type in expressions for evaluation. Or try :help.
+
+scala> // Программа вывода приветственного сообщения
+
+scala>   // Список приветственных слов:
+
+scala>   val welcoming_speech1: String = "Hallo"
+welcoming_speech1: String = Hallo
+
+scala>   val welcoming_speech2: String = "Guten Morgen"
+welcoming_speech2: String = Guten Morgen
+
+scala>   val welcoming_speech3: String = "Gute Nacht"
+welcoming_speech3: String = Gute Nacht
+
+scala>   // Выберите приветственное слово из Списка
+
+scala>   var welcoming_speech: String = welcoming_speech1
+welcoming_speech: String = Hallo
+
+scala>   // Введите Ваши имя и фамилию
+
+scala>   val name: String = "Wladimir Kokscharow"
+name: String = Wladimir Kokscharow
+
+scala>   def greeting : Unit = println (
+     |     welcoming_speech + ", Scala! Das ist " + name + "."
+     |   ) // Функция вывода приветственного сообщения
+greeting: Unit
+
+scala>   // Для вывода приветственного сообщения введите в терминале "greeting"
+
+scala>   greeting
+Hallo, Scala! Das ist Wladimir Kokscharow.
+
+scala>   // Выберите другое приветственное слово из Списка
+
+scala>   welcoming_speech = welcoming_speech2
+welcoming_speech: String = Guten Morgen
+
+scala>   // Для вывода приветственного сообщения введите в терминале "greeting"
+
+scala>   greeting
+Guten Morgen, Scala! Das ist Wladimir Kokscharow.
+
+scala>   // Выберите другое приветственное слово из Списка
+
+scala>   welcoming_speech = welcoming_speech3
+welcoming_speech: String = Gute Nacht
+
+scala>   // Для вывода приветственного сообщения введите в терминале "greeting"
+
+scala>   greeting
+Gute Nacht, Scala! Das ist Wladimir Kokscharow.
+
+scala>   def name_reverse = (for(i <- name.length - 1 to 0 by -1)
+     |     yield name(i)).mkString // Функция преобразования стандартной формы записи имени и фамилии в реверсивную
+name_reverse: String
+
+scala>   def greetings_reverse : Unit = println (
+     |       welcoming_speech1 + ", Scala! Das ist " + name_reverse + ".\n" +
+     |       welcoming_speech2 + ", Scala! Das ist " + name_reverse + ".\n" +
+     |       welcoming_speech3 + ", Scala! Das ist " + name_reverse + "."
+     |   ) // Функция вывода вариантов приветственных сообщений с реверсивной формой записи фамилии и имени
+greetings_reverse: Unit
+
+scala>   // Для вывода вариантов приветственных сообщений с реверсивной формой записи фамилии и имени введите в терминале "greetings_reverse"
+
+scala>   greetings_reverse
+Hallo, Scala! Das ist worahcskoK rimidalW.
+Guten Morgen, Scala! Das ist worahcskoK rimidalW.
+Gute Nacht, Scala! Das ist worahcskoK rimidalW.
+
+scala>
