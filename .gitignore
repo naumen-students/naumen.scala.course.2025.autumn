@@ -1,1 +1,16 @@
-.idea
+.idea/
+.vscode/
+.metals/
+.bloop/
+*.iml
+
+target/
+project/target/
+project/project/
+
+*.log
+*.db
+*.md
+*.checked
+.DS_Store
+Thumbs.db
