@@ -24,7 +24,7 @@ class ReferenceCell(val row: Int, val column: Int, val table: Table) extends Cel
       return Failure(new StackOverflowError)
 
     cell.table.getCell(cell.row, cell.column) match {
-      case Some(nextCell: ReferenceCell) => dereference(nextCell, prevCells.incl(cell))
+      case Some(nextCell: ReferenceCell) => dereference(nextCell, prevCells + cell)
       case Some(nextCell: ValueCell) => Success(nextCell)
       case None => Failure(new IndexOutOfBoundsException)
     }
@@ -38,3 +38,4 @@ class ReferenceCell(val row: Int, val column: Int, val table: Table) extends Cel
     }
   }
 }
+
