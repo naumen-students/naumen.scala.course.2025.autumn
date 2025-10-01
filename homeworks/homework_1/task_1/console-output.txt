@@ -1,0 +1,50 @@
+D:\Обучение Naumen\Scala\naumen.scala.course.2025.autumn>scala
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.jline.terminal.impl.exec.ExecTerminalProvider$ReflectionRedirectPipeCreator (file:/C:/scoop/apps/scala/current/maven2/org/jline/jline-terminal/3.29.0/jline-terminal-3.29.0.jar) to constructor java.lang.ProcessBuilder$RedirectPipeImpl()
+WARNING: Please consider reporting this to the maintainers of org.jline.terminal.impl.exec.ExecTerminalProvider$ReflectionRedirectPipeCreator
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Welcome to Scala 3.7.3 (11.0.28, Java OpenJDK 64-Bit Server VM).
+Type in expressions for evaluation. Or try :help.
+
+scala> val name = "Алексей Сапан"
+val name: String = Алексей Сапан
+
+scala> val greeting1 = "Привет"
+val greeting1: String = Привет
+
+scala> val greeting2 = "Hola"
+val greeting2: String = Hola
+
+scala> val greeting3 = "Guten tag"
+val greeting3: String = Guten tag
+
+scala> val message = s"$greeting1, Скала! Это $name"
+val message: String = Привет, Скала! Это Алексей Сапан
+
+scala> println(message)
+Привет, Скала! Это Алексей Сапан
+
+scala> val message2 = s"$greeting2, Скала! Это $name"
+val message2: String = Hola, Скала! Это Алексей Сапан
+
+scala> println(message2)
+Hola, Скала! Это Алексей Сапан
+
+scala> val message3 = s"$greeting3, Скала! Это $name"
+val message3: String = Guten tag, Скала! Это Алексей Сапан
+
+scala> println(message3)
+Guten tag, Скала! Это Алексей Сапан
+
+scala> val reversedName = name.reverse
+val reversedName: String = напаС йескелА
+
+scala> println(s"$greeting1, Скала! Это $reversedName")
+Привет, Скала! Это напаС йескелА
+
+scala> println(s"$greeting2, Скала! Это $reversedName")
+Hola, Скала! Это напаС йескелА
+
+scala> println(s"$greeting3, Скала! Это $reversedName")
+Guten tag, Скала! Это напаС йескелА
