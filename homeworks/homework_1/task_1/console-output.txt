@@ -1,0 +1,96 @@
+Microsoft Windows [Version 10.0.19045.6332]
+(c) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+
+C:\Users\user>scala
+Welcome to Scala 2.12.10 (OpenJDK 64-Bit Server VM, Java 11.0.28).
+Type in expressions for evaluation. Or try :help.
+
+scala> val str = "Hello Scala!"
+str: String = Hello Scala!
+
+scala> val name = "Anton"
+name: String = Anton
+
+scala> println(str + " I'm " + name)
+Hello Scala! I'm Anton
+
+scala> str = Scala
+<console>:12: error: reassignment to val
+       str = Scala
+           ^
+
+scala> val str = Scala
+<console>:11: error: not found: value Scala
+       val str = Scala
+                 ^
+
+scala> val str = "Scala"
+str: String = Scala
+
+scala> val strhi = "Hola"
+strhi: String = Hola
+
+scala> println(strhi + " " + str + " " + name)
+Hola Scala Anton
+
+scala> println(strhi + " " + str + " I'm " + name)
+Hola Scala I'm Anton
+
+scala> val str = Scala!
+<console>:11: error: not found: value Scala
+       val str = Scala!
+                 ^
+<console>:11: warning: postfix operator ! should be enabled
+by making the implicit value scala.language.postfixOps visible.
+This can be achieved by adding the import clause 'import scala.language.postfixOps'
+or by setting the compiler option -language:postfixOps.
+See the Scaladoc for value scala.language.postfixOps for a discussion
+why the feature should be explicitly enabled.
+       val str = Scala!
+                      ^
+
+scala> val str = "Scala!"
+str: String = Scala!
+
+scala> println(strhi + " " + str + " I'm " + name)
+Hola Scala! I'm Anton
+
+scala> strhi = "Hello"
+<console>:12: error: reassignment to val
+       strhi = "Hello"
+             ^
+
+scala> val strhi = "Hello"
+strhi: String = Hello
+
+scala> println(strhi + " " + str + " I'm " + name)
+Hello Scala! I'm Anton
+
+scala> val strhi = "Hola"
+strhi: String = Hola
+
+scala> println(strhi + " " + str + " I'm " + name)
+Hola Scala! I'm Anton
+
+scala> val strhi = "Ciao"
+strhi: String = Ciao
+
+scala> println(strhi + " " + str + " I'm " + name)
+Ciao Scala! I'm Anton
+
+scala> println(strhi + " " + str + " I'm " + name.reverse)
+Ciao Scala! I'm notnA
+
+scala> val strhi = "Hola"
+strhi: String = Hola
+
+scala> println(strhi + " " + str + " I'm " + name.reverse)
+Hola Scala! I'm notnA
+
+scala> val strhi = "Hello"
+strhi: String = Hello
+
+scala> println(strhi + " " + str + " I'm " + name.reverse)
+Hello Scala! I'm notnA
+
+scala>
