@@ -1,0 +1,50 @@
+C:\Users\gbant\.jdks\openjdk-22.0.1\bin\java.exe "-javaagent:D:\IntelliJ IDEA Community Edition 2025.2.1\lib\idea_rt.jar=63365" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath C:\Users\gbant\AppData\Local\Coursier\cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala-compiler\2.13.16\scala-compiler-2.13.16.jar;C:\Users\gbant\AppData\Local\Coursier\cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala-library\2.13.16\scala-library-2.13.16.jar;C:\Users\gbant\AppData\Local\Coursier\cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala-reflect\2.13.16\scala-reflect-2.13.16.jar;D:\scala-projects\ScalaHomework1\out\production\ScalaHomework1;C:\Users\gbant\AppData\Roaming\JetBrains\IdeaIC2025.2\plugins\Scala\lib\runners.jar scala.tools.nsc.MainGenericRunner -usejavacp -Xnojline
+Welcome to Scala 2.13.16 (OpenJDK 64-Bit Server VM, Java 22.0.1).
+Type in expressions for evaluation. Or try :help.
+
+scala> val name = "Антон"
+val name: String = Антон
+
+scala> val greeting = s"Привет, Скала! Это $name"
+val greeting: String = Привет, Скала! Это Антон
+
+scala> println(greeting)
+Привет, Скала! Это Антон
+
+scala> val greetingHola = s"Hola, Скала! Это $name"
+val greetingHola: String = Hola, Скала! Это Антон
+
+scala> println(greetingHola)
+Hola, Скала! Это Антон
+
+scala> val greetingGuten = s"Guten tag, Скала! Это $name"
+val greetingGuten: String = Guten tag, Скала! Это Антон
+
+scala> println(greetingGuten)
+Guten tag, Скала! Это Антон
+
+scala> def reverseName(str: String): String = str.reverse
+def reverseName(str: String): String
+
+scala> val reversedName = reverseName(name)
+val reversedName: String = нотнА
+
+scala> val reversedGreeting = s"Привет, Скала! Это $reversedName"
+val reversedGreeting: String = Привет, Скала! Это нотнА
+
+scala> println(reversedGreeting)
+Привет, Скала! Это нотнА
+
+scala> val reversedGreetingHola = s"Hola, Скала! Это $reversedName"
+val reversedGreetingHola: String = Hola, Скала! Это нотнА
+
+scala> println(reversedGreetingHola)
+Hola, Скала! Это нотнА
+
+scala> val reversedGreetingGuten = s"Guten tag, Скала! Это $reversedName"
+val reversedGreetingGuten: String = Guten tag, Скала! Это нотнА
+
+scala> println(reversedGreetingGuten)
+Guten tag, Скала! Это нотнА
+
+scala>
