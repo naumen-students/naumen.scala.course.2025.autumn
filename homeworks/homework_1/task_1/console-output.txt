@@ -1,0 +1,57 @@
+**********************
+Начало записи сценария Windows PowerShell
+Время начала: 20250924134319
+Имя пользователя: DESKTOP-0HAQOTT\Настя
+Запуск от имени пользователя: DESKTOP-0HAQOTT\Настя
+Имя конфигурации:
+Компьютер: DESKTOP-0HAQOTT (Microsoft Windows NT 10.0.19045.0)
+Ведущее приложение: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+ИД процесса: 4864
+PSVersion: 5.1.19041.6093
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.6093
+BuildVersion: 10.0.19041.6093
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Транскрибирование запущено, выходной файл .\homeworks\homework_1\task_1\console-output.txt
+PS C:\Users\Настя> scala
+Welcome to Scala 2.12.10 (OpenJDK 64-Bit Server VM, Java 11.0.12).
+Type in expressions for evaluation. Or try :help.
+
+scala> val myName = "Danila"
+myName: String = Danila
+
+scala> val baseHello = "Привет"
+baseHello: String = ╧ЁштхЄ
+
+scala> val baseHello = "Hello"
+baseHello: String = Hello
+
+scala> val greet = (word: String, name: String) => s"$word, Scala! It is $name"
+greet: (String, String) => String = $$Lambda$1090/0x000000010079c040@4780341
+
+scala> println(greet(baseHello, myName))
+Hello, Scala! It is Danila
+
+scala> val otherHellos = List("Hola", "Guten tag")
+otherHellos: List[String] = List(Hola, Guten tag)
+
+scala> otherHellos.foreach(h => println(greet(h, myName)))
+Hola, Scala! It is Danila
+Guten tag, Scala! It is Danila
+
+scala> val recipients = List("Ian Ivanov", "Maria Sidorova", myName)
+recipients: List[String] = List(Ian Ivanov, Maria Sidorova, Danila)
+
+scala> val reverse: String => String = _.reverse
+reverse: String => String = $$Lambda$1139/0x00000001007c8040@202b5293
+
+scala> recipients.foreach(n => println(greet(baseHello, reverse(n))))
+Hello, Scala! It is vonavI naI
+Hello, Scala! It is avorodiS airaM
+Hello, Scala! It is alinaD
+
+scala> :quit
