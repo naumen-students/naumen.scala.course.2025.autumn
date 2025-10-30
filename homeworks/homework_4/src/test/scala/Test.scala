@@ -4,9 +4,9 @@ import scala.util.Random
 
 object Test extends TestSuite {
     lazy val randomLength = Random
-    def generateRandomList(maxListSize: Int) = {
-        val listLength = Random.nextInt(maxListSize)
-        List.fill(listLength)(Random.nextInt)
+    def generateRandomList(maxListSize: Int): List[Int] = {
+        val listLength = Random.nextInt(maxListSize - 1) + 1
+        List.fill(listLength)(Random.nextInt())
     }
     override def tests: Tests = Tests {
         'firstTask - (1 to 5).foreach { _ =>
