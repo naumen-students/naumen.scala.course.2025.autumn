@@ -1,4 +1,5 @@
 import utest._
+import homework3._
 
 object Test extends TestSuite {
     val tests = Tests {
