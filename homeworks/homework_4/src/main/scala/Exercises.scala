@@ -1,3 +1,5 @@
+import scala.annotation.tailrec
+import scala.util.{Failure, Random, Success, Try}
 
 object Exercises {
 
@@ -23,7 +25,14 @@ object Exercises {
     }
 
     def findSumFunctional(items: List[Int], sumValue: Int) = {
-        (-1, -1)
+        items.zipWithIndex.flatMap {
+            case (itemI, i) =>
+                items.zipWithIndex.filter {
+                    case (itemJ, j) => itemI + itemJ == sumValue && i != j
+                }.map {
+                    case (_, j) => (i, j)
+                }
+        }.lastOption.getOrElse((-1, -1))
     }
 
 
@@ -49,7 +58,21 @@ object Exercises {
     }
 
     def tailRecRecursion(items: List[Int]): Int = {
-        1
+        @tailrec
+        def recursive(items: List[Int], index: Int, accumulator: Int): Int = {
+            items match {
+                case head :: tail =>
+                        if (head % 2 == 0) {
+                            recursive(tail, index - 1, accumulator * head + index)
+
+                        } else {
+                            recursive(tail, index - 1, accumulator * -1 * head + index)
+                        }
+                case _ => accumulator
+            }
+        }
+
+        recursive(items.reverse, items.size, 1)
     }
 
     /**
@@ -60,7 +83,21 @@ object Exercises {
      */
 
     def functionalBinarySearch(items: List[Int], value: Int): Option[Int] = {
-        None
+        @tailrec
+        def binarySearchRecursive(low: Int, high: Int): Option[Int] = {
+            if (low > high) {
+                None
+            } else {
+                val mid = low + (high - low) / 2
+                items(mid) match {
+                    case middle if middle == value => Some(mid)
+                    case middle if middle < value => binarySearchRecursive(mid + 1, high)
+                    case _ => binarySearchRecursive(low, mid - 1)
+                }
+            }
+        }
+
+        binarySearchRecursive(0, items.length - 1)
     }
 
     /**
@@ -73,7 +110,12 @@ object Exercises {
 
     def generateNames(namesСount: Int): List[String] = {
         if (namesСount < 0) throw new Throwable("Invalid namesCount")
-        Nil
+        def randomCapitalLetter: Char = ('A' + Random.nextInt(26)).toChar
+
+        def generateName(length: Int): String = {
+            randomCapitalLetter +: List.fill(length - 1)(('a' + Random.nextInt(26)).toChar).mkString
+        }
+        List.fill(namesСount)(generateName(Random.nextInt(7) + 4))
     }
 
 }
@@ -111,14 +153,37 @@ object SideEffectExercise {
 
 
     class PhoneServiceSafety(unsafePhoneService: SimplePhoneService) {
-        def findPhoneNumberSafe(num: String) = ???
+        def findPhoneNumberSafe(num: String): Option[String] = Option(unsafePhoneService.findPhoneNumber(num))
 
-        def addPhoneToBaseSafe(phone: String) = ???
+        def addPhoneToBaseSafe(phone: String): Either[String, Unit] = {
+            Try(unsafePhoneService.addPhoneToBase(phone)) match {
+                case Success(ok) => Right(ok)
+                case Failure(exception) => Left(exception.getMessage)
+            }
+        }
 
-        def deletePhone(phone: String) = ???
+        def deletePhoneSafe(phone: String): Either[String, String] = {
+            Try(unsafePhoneService.deletePhone(phone)) match {
+                case Success(_) => Right("ok")
+                case Failure(exception) => Left(exception.getMessage)
+            }
+        }
     }
 
     class ChangePhoneServiceSafe(phoneServiceSafety: PhoneServiceSafety) extends ChangePhoneService {
-        override def changePhone(oldPhone: String, newPhone: String): String = ???
+        override def changePhone(oldPhone: String, newPhone: String): String = {
+            phoneServiceSafety.findPhoneNumberSafe(oldPhone) match {
+                case Some(_) =>
+                    phoneServiceSafety.deletePhoneSafe(oldPhone) match {
+                        case Right(_) =>
+                            phoneServiceSafety.addPhoneToBaseSafe(newPhone) match {
+                                case Right(_) => "ok"
+                                case Left(error) => error
+                            }
+                        case Left(error) => error
+                    }
+                case _ => "Not found"
+            }
+        }
     }
 }
