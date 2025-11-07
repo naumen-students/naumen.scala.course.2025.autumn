@@ -25,8 +25,37 @@ object Task3 extends App {
   case class Count(word: String, count: Int)
   case class WordsCount(count: Seq[Count])
   object WordsCount {
-    implicit val monoid: Monoid[WordsCount] = ???
+    implicit val monoid: Monoid[WordsCount] = new Monoid[WordsCount] {
+      def empty: WordsCount = WordsCount(Seq.empty)
+
+      def combine(a: WordsCount, b: WordsCount): WordsCount = {
+        val allCounts = (a.count ++ b.count)
+          .groupBy(_.word)
+          .map { case (word, counts) =>
+            Count(word, counts.map(_.count).sum)
+          }
+          .toSeq
+
+        WordsCount(allCounts)
+      }
+    }
   }
 
-  def countWords(lines: Vector[String]): WordsCount = ???
+  def countWords(lines: Vector[String]): WordsCount = {
+    implicit val monoidInstance: Monoid[WordsCount] = WordsCount.monoid
+
+    def processLine(line: String): WordsCount = {
+      val words = line.split("\\s+").filter(_.nonEmpty)
+      val wordCounts = words
+        .groupBy(identity)
+        .map { case (word, occurrences) => Count(word, occurrences.length) }
+        .toSeq
+
+      WordsCount(wordCounts)
+    }
+
+    val resultFuture = mapReduce(lines)(processLine)
+
+    Await.result(resultFuture, 10.seconds)
+  }
 }
