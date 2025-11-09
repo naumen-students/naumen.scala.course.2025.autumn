@@ -1,0 +1,3 @@
+﻿target/
+.bsp/sbt.json
+project/build.properties
