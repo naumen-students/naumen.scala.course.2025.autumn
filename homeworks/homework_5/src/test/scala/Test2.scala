@@ -14,10 +14,13 @@ object Test2 extends TestSuite {
       val resultVector = RadiusVector(xs.sum, ys.sum)
       assert(vectors.combineAll == resultVector)
     }
+    // Избавился от переполнения
     'angleMustSum - (1 to 5).foreach { _ =>
       val angles = Vector.fill(50)(DegreeAngle(Random.nextInt))
-      val result = angles.map(_.angel).sum % 360
-      assert(angles.combineAll == DegreeAngle(result))
+      val sum = angles.map(_.angel).sum
+      val result = sum % 360
+      val normalized = if (result < 0) result + 360 else result
+      assert(angles.combineAll == DegreeAngle(normalized))
     }
     'matrixMustSum - (1 to 5).foreach { _ =>
       val firstRow = List.fill(50)(List.fill(3)(Random.nextInt))
