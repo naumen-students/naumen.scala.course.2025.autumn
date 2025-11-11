@@ -1,0 +1,45 @@
+PS C:\Users\egore> scala
+Welcome to Scala 2.13.12 (Java HotSpot(TM) 64-Bit Server VM, Java 22.0.2).
+Type in expressions for evaluation. Or try :help.
+
+scala> val myName = "Егор"
+val myName: String = Егор
+
+scala> val greeting1 = s"Привет, Скала! Это $myName"
+val greeting1: String = Привет, Скала! Это Егор
+
+scala> println(greeting1)
+Привет, Скала! Это Егор
+
+scala> val greeting2 = s"Hola, Скала! Это $myName"
+val greeting2: String = Hola, Скала! Это Егор
+
+scala> println(greeting2)
+Hola, Скала! Это Егор
+
+scala> val greeting3 = s"Guten tag, Скала! Это $myName"
+val greeting3: String = Guten tag, Скала! Это Егор
+
+scala> println(greeting3)
+Guten tag, Скала! Это Егор
+
+scala> val reversedMyName = myName.reverse
+val reversedMyName: String = рогЕ
+
+scala> val reversedGreeting1 = s"Привет, Скала! Это $reversedMyName"
+val reversedGreeting1: String = Привет, Скала! Это рогЕ
+
+scala> println(reversedGreeting1)
+Привет, Скала! Это рогЕ
+
+scala> val reversedGreeting2 = s"Hola, Скала! Это $reversedMyName"
+val reversedGreeting2: String = Hola, Скала! Это рогЕ
+
+scala> println(reversedGreeting2)
+Hola, Скала! Это рогЕ
+
+scala> val reversedGreeting3 = s"Guten tag, Скала! Это $reversedMyName"
+val reversedGreeting3: String = Guten tag, Скала! Это рогЕ
+
+scala> println(reversedGreeting3)
+Guten tag, Скала! Это рогЕ
