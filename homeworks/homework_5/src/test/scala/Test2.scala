@@ -16,7 +16,10 @@ object Test2 extends TestSuite {
     }
     'angleMustSum - (1 to 5).foreach { _ =>
       val angles = Vector.fill(50)(DegreeAngle(Random.nextInt))
-      val result = angles.map(_.angel).sum % 360
+      // почему-то происходит переполнение, поэтому заменил на функцию, которая суммирует по шагам и е допускает его
+      val result = angles.foldLeft(0)((acc, angle) => {
+        (acc + (angle.angel % 360) + 360) % 360
+      }) // (angle.angel % 360) + 360) делает угол положительным, если angle.angel % 360 отрицательный
       assert(angles.combineAll == DegreeAngle(result))
     }
     'matrixMustSum - (1 to 5).foreach { _ =>
