@@ -1,4 +1,4 @@
-import scala.util.{Failure, Success, Try}
+
 
 /*
   Задание №5
@@ -14,13 +14,38 @@ object Task5 extends App {
   sealed trait MyEither[+E, +A] {
     def isError: Boolean
   }
-  object MyEither {
-    def apply[A](value: A): MyEither[Nothing, A] = ???
-    def error[E, A](error: E): MyEither[E, A] = ???
-    def possibleError[A](f: => A): MyEither[Throwable, A] = ???
-
-    implicit def myEitherMonad[E]: MonadError[MyEither, E] = ???
+  final case class MyRight[+A](value: A) extends MyEither[Nothing, A] {
+    def isError: Boolean = false
   }
+  final case class MyLeft[+E](error: E) extends MyEither[E, Nothing] {
+    def isError: Boolean = true
+  }
+
+  object MyEither {
+    def apply[A](value: A): MyEither[Nothing, A] = MyRight(value)
+    def error[E, A](error: E): MyEither[E, A] = MyLeft(error)
+    def possibleError[A](f: => A): MyEither[Throwable, A] =
+      try MyRight(f) catch { case t: Throwable => MyLeft(t) }
+
+    implicit def myEitherMonad[E]: MonadError[MyEither, E] = new MonadError[MyEither, E] {
+      def pure[A](value: A): MyEither[E, A] = MyRight(value)
+      def flatMap[A, B](fa: MyEither[E, A])(f: A => MyEither[E, B]): MyEither[E, B] =
+        fa match {
+          case MyRight(a) => f(a)
+          case l @ MyLeft(_) => l
+        }
+      override def map[A, B](fa: MyEither[E, A])(f: A => B): MyEither[E, B] =
+        flatMap(fa)(a => pure(f(a)))
+      def raiseError[A](fa: MyEither[E, A])(error: => E): MyEither[E, A] =
+        MyLeft(error)
+      def handleError[A](fa: MyEither[E, A])(handle: E => A): MyEither[E, A] =
+        fa match {
+          case MyLeft(e)  => MyRight(handle(e))
+          case r @ MyRight(_) => r
+        }
+    }
+  }
+
 
   object MyEitherSyntax {
     implicit class MyEitherOps[E, A](val either: MyEither[E, A]) {
