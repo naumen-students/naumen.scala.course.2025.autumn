@@ -1,6 +1,8 @@
 import utils.ColorService.ColorService
 import utils.PictureGenerationService.PictureGenerationService
 import utils.Utils._
+import utils.ColorService
+import utils.PictureGenerationService
 import zio.{IO, Random, URIO, ZIO}
 
 import java.awt.Color
@@ -12,17 +14,23 @@ object Exercises {
      * вернулся None, а в случае упеха Some
      */
     def task1(r: Int, g: Int, b: Int): URIO[ColorService, Option[Color]] =
-        ZIO.serviceWithZIO[ColorService](_.getColor(r, g, b))
+      ZIO.serviceWithZIO[ColorService](_.getColor(r, g, b).option)
 
 
-    /**
+
+  /**
      * Неободимо модифицировать ZIO объект так, чтобы он возвращал текстовую матрицу цветов вида
      * 1 23 -4
      * 25 -1 2
      * где элементы - числовые значения объекта Color (можно получить через getRGB)
      */
     def task2(size: (Int, Int)): ZIO[PictureGenerationService, GenerationError, String] =
-        ZIO.serviceWithZIO[PictureGenerationService](_.generatePicture(size))
+      ZIO.serviceWithZIO[PictureGenerationService](_.generatePicture(size)).map { picture =>
+        picture.lines
+          .map(row => row.map(ceil => (ceil.getRGB & 0xFFFFFF).toString).mkString(" "))
+          .mkString("\n")
+      } // пришлось & 0xFFFFFF вставить, ведь там ещё альфаканал есть, который отрицательное число возвращает
+  // (если смотреть биты суммарные как число)
 
 
     /**
@@ -34,18 +42,26 @@ object Exercises {
      *  - при заполнении картинки -> Возникли проблемы при заливке изображения
      */
     def task3(size: (Int, Int)): ZIO[PictureGenerationService with ColorService, GenerationError, Picture] =
-        for {
-            colorServ <- ZIO.service[ColorService]
-            pictureServ <- ZIO.service[PictureGenerationService]
-            color <- colorServ.generateRandomColor()
-            picture <- pictureServ.generatePicture(size)
-            filledPicture <- pictureServ.fillPicture(picture, color)
-        } yield filledPicture
+      for {
+        colorService     <- ZIO.service[ColorService]
+        color <- colorService.generateRandomColor()
+          .mapError(_ => new GenerationError("Не удалось создать цвет"))
+
+        pictureService   <- ZIO.service[PictureGenerationService]
+        picture <- pictureService.generatePicture(size)
+          .mapError(_ => new GenerationError("Ошибка генерации изображения"))
+        filledPicture <- pictureService.fillPicture(picture, color)
+          .mapError(_ => new GenerationError("Возникли проблемы при заливке изображения"))
+
+      } yield filledPicture
 
     /**
      * Необходимо предоставить объекту ZIO все необходимые зависимости
      */
     def task4(size: (Int, Int)): IO[GenerationError, Picture] =
-        task3(size)
+      task3(size).provide(
+        ColorService.live,
+        PictureGenerationService.live
+      )
 
 }
