@@ -22,8 +22,16 @@ object Exercises {
         result
     }
 
-    def findSumFunctional(items: List[Int], sumValue: Int) = {
-        (-1, -1)
+    def findSumFunctional(items: List[Int], sumValue: Int): (Int, Int) = {
+        val indexedItems = items.zipWithIndex
+
+        val allPairs = for {
+            (item1, i) <- indexedItems
+            (item2, j) <- indexedItems
+            if i != j && item1 + item2 == sumValue
+        } yield (i, j)
+
+        allPairs.lastOption.getOrElse((-1, -1))
     }
 
 
@@ -49,7 +57,11 @@ object Exercises {
     }
 
     def tailRecRecursion(items: List[Int]): Int = {
-        1
+        items.zipWithIndex.foldRight(1) { case ((head, i), acc) =>
+            val index = i + 1
+            val signedHead = if (head % 2 == 0) head else -head
+            signedHead * acc + index
+        }
     }
 
     /**
@@ -60,7 +72,26 @@ object Exercises {
      */
 
     def functionalBinarySearch(items: List[Int], value: Int): Option[Int] = {
-        None
+        val itemsVector = items.toVector
+
+        def search(low: Int, high: Int): Option[Int] = {
+            if (low > high) {
+                None
+            } else {
+                val mid = low + (high - low) / 2
+                val midValue = itemsVector(mid)
+
+                if (midValue == value) {
+                    Some(mid)
+                } else if (midValue < value) {
+                    search(mid + 1, high)
+                } else {
+                    search(low, mid - 1)
+                }
+            }
+        }
+
+        search(0, itemsVector.length - 1)
     }
 
     /**
@@ -73,7 +104,20 @@ object Exercises {
 
     def generateNames(namesСount: Int): List[String] = {
         if (namesСount < 0) throw new Throwable("Invalid namesCount")
-        Nil
+        if (namesСount == 0) return Nil
+
+        val random = new scala.util.Random
+
+        def generateRandomName(): String = {
+            val length = random.nextInt(8) + 3
+            val firstChar = (random.nextInt(26) + 'A').toChar.toString
+            val otherChars = List.fill(length - 1)((random.nextInt(26) + 'a').toChar).mkString
+            firstChar + otherChars
+        }
+
+        List.fill(namesСount * 5)(generateRandomName())
+          .distinct
+          .take(namesСount)
     }
 
 }
@@ -98,6 +142,7 @@ object Exercises {
 object SideEffectExercise {
     import Utils._
 
+
     class SimpleChangePhoneService(phoneService: SimplePhoneService) extends ChangePhoneService {
         override def changePhone(oldPhone: String, newPhone: String): String = {
             val oldPhoneRecord = phoneService.findPhoneNumber(oldPhone)
@@ -111,14 +156,37 @@ object SideEffectExercise {
 
 
     class PhoneServiceSafety(unsafePhoneService: SimplePhoneService) {
-        def findPhoneNumberSafe(num: String) = ???
+        def findPhoneNumberSafe(num: String): Option[String] = {
+            Option(unsafePhoneService.findPhoneNumber(num))
+        }
 
-        def addPhoneToBaseSafe(phone: String) = ???
+        def addPhoneToBaseSafe(phone: String): Either[String, Unit] = {
+            try {
+                unsafePhoneService.addPhoneToBase(phone)
+                Right(())
+            } catch {
+                case e: InternalError => Left(e.getMessage)
+                case e: Throwable => Left(s"${e.getMessage}")
+            }
+        }
 
-        def deletePhone(phone: String) = ???
+        def deletePhone(phone: String): Unit = {
+            unsafePhoneService.deletePhone(phone)
+        }
     }
 
     class ChangePhoneServiceSafe(phoneServiceSafety: PhoneServiceSafety) extends ChangePhoneService {
-        override def changePhone(oldPhone: String, newPhone: String): String = ???
+        override def changePhone(oldPhone: String, newPhone: String): String = {
+            phoneServiceSafety.findPhoneNumberSafe(oldPhone) match {
+                case Some(oldPhoneRecord) =>
+                    phoneServiceSafety.deletePhone(oldPhoneRecord)
+                case None =>
+            }
+
+            phoneServiceSafety.addPhoneToBaseSafe(newPhone) match {
+                case Right(_) => "ok"
+                case Left(error) => error
+            }
+        }
     }
 }
