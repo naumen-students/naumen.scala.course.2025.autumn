@@ -29,13 +29,52 @@ object Breakfast extends ZIOAppDefault {
    * @param teaBrewingTime время заваривания чая
    * @return Мапу с информацией о том, когда завершился очередной этап (eggs, water, saladWithSourCream, tea)
    */
-  def makeBreakfast(eggsFiringTime: Duration,
-                    waterBoilingTime: Duration,
-                    saladInfoTime: SaladInfoTime,
-                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = ???
+  def makeBreakfast(
+     eggsFiringTime: Duration,
+     waterBoilingTime: Duration,
+     saladInfoTime: SaladInfoTime,
+     teaBrewingTime: Duration
+  ): ZIO[Any, Throwable, Map[String, LocalDateTime]] = {
 
+    val currentTime: ZIO[Any, Throwable, LocalDateTime] =
+      ZIO.attempt(LocalDateTime.now())
 
+    val eggs: ZIO[Any, Throwable, LocalDateTime] =
+      for {
+        _ <- ZIO.sleep(eggsFiringTime)
+        time <- currentTime
+      } yield time
 
-  override def run: ZIO[Any with ZIOAppArgs with Scope, Any, Any] = ZIO.succeed(println("Done"))
+    val salad: ZIO[Any, Throwable, LocalDateTime] =
+      for {
+        _ <- ZIO.sleep(saladInfoTime.cucumberTime)
+        _ <- ZIO.sleep(saladInfoTime.tomatoTime)
+        time <- currentTime
+      } yield time
 
+    val waterAndTea: ZIO[Any, Throwable, (LocalDateTime, LocalDateTime)] =
+      for {
+        _ <- ZIO.sleep(waterBoilingTime)
+        waterTime <- currentTime
+        _ <- ZIO.sleep(teaBrewingTime)
+        teaTime <- currentTime
+      } yield (waterTime, teaTime)
+
+    for {
+      eggsFiber  <- eggs.fork
+      saladFiber <- salad.fork
+      wt <- waterAndTea
+      (waterTime, teaTime) = wt
+      eggsTime <- eggsFiber.join
+      saladTime <- saladFiber.join
+    } yield Map(
+      "eggs" -> eggsTime,
+      "water" -> waterTime,
+      "saladWithSourCream" -> saladTime,
+      "tea" -> teaTime
+    )
+  }
+
+  override def run: ZIO[Any with ZIOAppArgs with Scope, Any, Any] =
+    ZIO.succeed(println("Done"))
 }
