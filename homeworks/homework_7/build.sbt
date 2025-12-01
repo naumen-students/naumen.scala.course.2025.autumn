@@ -8,5 +8,7 @@ lazy val root = (project in file("."))
     idePackagePrefix := Some("ru.dru"),
     // https://mvnrepository.com/artifact/dev.zio/zio
     libraryDependencies += "dev.zio" %% "zio" % "2.0.5",
-      libraryDependencies ++= Seq( "dev.zio" %% "zio-test" % "2.0.5" % Test )
+      libraryDependencies ++= Seq( "dev.zio" %% "zio-test" % "2.0.5" % Test,
+      "dev.zio" %% "zio-test-sbt" % "2.0.5" % Test ),
+    testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework")
   )
