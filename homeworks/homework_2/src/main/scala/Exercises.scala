@@ -16,7 +16,7 @@ object Exercises {
     на 3 или на 5.*/
   /*Реализовать юнит-тесты в src/test/scala для данной функции.*/
   def sumOfDivBy3Or5(iFrom: Int, iTo: Int): Long = {
-    (iFrom to iTo).filter((x: Int) => x % 3 == 0 || x % 5 == 0).sum
+    (iFrom to iTo).filter(x => x % 3 == 0 || x % 5 == 0).sum
   }
 
   /*ЗАДАНИЕ II*/
@@ -24,7 +24,28 @@ object Exercises {
     Число 80 раскладывается на множители 1 * 2 * 2 * 2 * 2 * 5, результат выполнения функции => Seq(2, 5).
     Число 98 можно разложить на множители 1 * 2 * 7 * 7, результат выполнения функции => Seq(2, 7).*/
   /*Реализовать юнит-тесты в src/test/scala для данной функции.*/
-  def primeFactor(number: Int): Seq[Int] = ???
+  def primeFactor(number: Int): Seq[Int] = {
+    var quotient = math.abs(number)
+    if (quotient <= 1)
+      return Seq.empty
+
+    var factors = Vector.empty[Int]
+    val checkFactor = (factor: Int) => {
+      if (quotient % factor == 0) {
+        factors = factors :+ factor
+        while (quotient % factor == 0) {
+          quotient /= factor
+        }
+      }
+    }
+
+    checkFactor(2)
+    for (i <- 3 to math.sqrt(quotient).toInt by 2) checkFactor(i)
+    if (quotient > 1)
+      factors = factors :+ quotient
+
+    factors
+  }
 
   /*ЗАДАНИЕ III*/
   /*Дано: класс двумерного вектора, а также функции вычисления модуля вектора (abs), вычисления скалярного произведения
