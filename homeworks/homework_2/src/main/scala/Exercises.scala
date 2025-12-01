@@ -16,9 +16,7 @@ object Exercises {
     на 3 или на 5.*/
   /*Реализовать юнит-тесты в src/test/scala для данной функции.*/
   def sumOfDivBy3Or5(iFrom: Int, iTo: Int): Long = {
-    var result = 0
-    for { i <- iFrom to iTo if i % 3 == 0 || i % 5 == 0 } result += i
-    result
+    (iFrom to iTo).filter((x: Int) => x % 3 == 0 || x % 5 == 0).sum
   }
 
   /*ЗАДАНИЕ II*/
