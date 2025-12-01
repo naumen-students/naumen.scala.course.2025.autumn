@@ -30,5 +30,63 @@ object Test extends TestSuite {
       assert(Exercises.primeFactor(-1) == Seq())
       assert(Exercises.primeFactor(-80) == Seq(2, 5))
     }
+    'test_sumScalars - {
+      assert(
+        Exercises.sumScalars(
+          Exercises.Vector2D(-1, -1),
+          Exercises.Vector2D(1, 1),
+          Exercises.Vector2D(-5, -5),
+          Exercises.Vector2D(5, 5)
+        ) == -52
+      )
+      assert(
+        Exercises.sumScalars(
+          Exercises.Vector2D(0, 0),
+          Exercises.Vector2D(1, 1),
+          Exercises.Vector2D(0, 5),
+          Exercises.Vector2D(5, 0)
+        ) == 0
+      )
+      assert(
+        Exercises.sumScalars(
+          Exercises.Vector2D(0, -1),
+          Exercises.Vector2D(0, 1),
+          Exercises.Vector2D(5, 0),
+          Exercises.Vector2D(5, 0)
+        ) == 24
+      )
+    }
+    'test_sumCosines - {
+      assert(
+        Exercises
+          .sumCosines(
+            Exercises.Vector2D(0, 0),
+            Exercises.Vector2D(1, 1),
+            Exercises.Vector2D(0, 5),
+            Exercises.Vector2D(5, 0)
+          )
+          .isNaN
+      )
+      assert(
+        math.abs(
+          Exercises.sumCosines(
+            Exercises.Vector2D(1, 1),
+            Exercises.Vector2D(5, 5),
+            Exercises.Vector2D(5, 5),
+            Exercises.Vector2D(1, 1)
+          ) - 2
+        ) < 0.001
+      )
+      assert(
+        math.abs(
+          Exercises.sumCosines(
+            Exercises.Vector2D(1, 1),
+            Exercises.Vector2D(1, 0),
+            Exercises.Vector2D(0, 5),
+            Exercises.Vector2D(5, 0)
+          ) - math.sqrt(2) / 2
+        ) < 0.001
+      )
+    }
   }
 }
