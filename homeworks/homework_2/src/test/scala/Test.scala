@@ -88,5 +88,46 @@ object Test extends TestSuite {
         ) < 0.001
       )
     }
+    'test_sortByHeavyweight - {
+      assert(
+        Exercises.sortByHeavyweight(Map("A" -> (1, 5), "B" -> (2, 5))) == Seq(
+          "A",
+          "B"
+        )
+      )
+      assert(
+        Exercises.sortByHeavyweight(Map("A" -> (1, 5), "B" -> (1, 7))) == Seq(
+          "A",
+          "B"
+        )
+      )
+      assert(
+        Exercises.sortByHeavyweight() == Seq(
+          "Tin",
+          "Platinum",
+          "Nickel",
+          "Aluminum",
+          "Titanium",
+          "Lead",
+          "Sodium",
+          "Uranium",
+          "Gold",
+          "Tungsten",
+          "Zirconium",
+          "Chrome",
+          "Iron",
+          "Copper",
+          "Silver",
+          "Plutonium",
+          "Cobalt",
+          "Cesium",
+          "Calcium",
+          "Lithium",
+          "Magnesium",
+          "Potassium",
+          "Graphite"
+        )
+      )
+    }
   }
 }

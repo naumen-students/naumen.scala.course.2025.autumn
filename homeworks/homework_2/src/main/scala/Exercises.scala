@@ -87,9 +87,7 @@ object Exercises {
       rightVec0: Vector2D,
       rightVec1: Vector2D
   ): Double = {
-    val result = sumByFunc(leftVec0, leftVec1, cosBetween, rightVec0, rightVec1)
-    print(result)
-    result
+    sumByFunc(leftVec0, leftVec1, cosBetween, rightVec0, rightVec1)
   }
 
   /*ЗАДАНИЕ IV*/
@@ -130,6 +128,14 @@ object Exercises {
 
   def sortByHeavyweight(
       ballsArray: Map[String, (Int, Double)] = balls
-  ): Seq[String] = ???
+  ): Seq[String] = {
+    val mass = (r: Int, density: Double) =>
+      4 / 3 * java.lang.Math.PI * r * r * r * density
 
+    ballsArray.toSeq
+      .sortWith((ball0, ball1) =>
+        (mass(ball0._2._1, ball0._2._2) < mass(ball1._2._1, ball1._2._2))
+      )
+      .map(ball => ball._1)
+  }
 }
