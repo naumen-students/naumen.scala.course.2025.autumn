@@ -32,8 +32,34 @@ object Breakfast extends ZIOAppDefault {
   def makeBreakfast(eggsFiringTime: Duration,
                     waterBoilingTime: Duration,
                     saladInfoTime: SaladInfoTime,
-                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = ???
+                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = {
+//    for {
+//      start <- ZIO.succeed(LocalDateTime.now())
+//      waterBoiling <- ZIO.sleep(waterBoilingTime).as("water" -> start.plus(waterBoilingTime)).fork
+//      eggsFiring <- ZIO.sleep(eggsFiringTime).as("eggs" -> start.plus(eggsFiringTime)).fork
+//      saladMaking <- ZIO.sleep(saladInfoTime.cucumberTime.plus(saladInfoTime.tomatoTime))
+//        .as("saladWithSourCream" -> start.plus(saladInfoTime.cucumberTime).plus(saladInfoTime.tomatoTime)).fork
+//
+//      water <- waterBoiling.join
+//      tea <- ZIO.sleep(teaBrewingTime).as("tea" -> water._2.plus(teaBrewingTime))
+//      eggs <- eggsFiring.join
+//      salad <- saladMaking.join
+//    } yield Map(
+//          "eggs" -> eggs,
+//          "water" -> water,
+//          "saladWithSourCream" -> salad,
+//          "tea" -> tea,
+//        )
 
+    for {
+            start <- ZIO.succeed(LocalDateTime.now())
+            water <- ZIO.sleep(waterBoilingTime).as("water" -> start.plus(waterBoilingTime))
+            tea <- ZIO.sleep(teaBrewingTime).as("tea" -> water._2.plus(teaBrewingTime))
+            eggs <- ZIO.sleep(eggsFiringTime).as("eggs" -> start.plus(eggsFiringTime))
+            salad <- ZIO.sleep(saladInfoTime.cucumberTime.plus(saladInfoTime.tomatoTime))
+              .as("saladWithSourCream" -> start.plus(saladInfoTime.cucumberTime).plus(saladInfoTime.tomatoTime))
+          } yield Map(eggs, water, salad, tea)
+  }
 
 
   override def run: ZIO[Any with ZIOAppArgs with Scope, Any, Any] = ZIO.succeed(println("Done"))
