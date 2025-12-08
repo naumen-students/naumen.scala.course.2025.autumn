@@ -1,0 +1,32 @@
+Welcome to Scala 2.12.10 (OpenJDK 64-Bit Server VM, Java 11.0.16.1).
+Type in expressions for evaluation. Or try :help.
+
+scala> val name = "Alexander Gorshkov"
+name: String = Alexander Gorshkov
+
+scala> val greetingEng = "Hello Scala! This is "
+greetingEng: String = "Hello Scala! This is "
+
+scala> val greetingEsp = "Hola Scala! This is "
+greetingEsp: String = "Hola Scala! This is "
+
+scala> val greetingIt = "Ciao Scala! This is "
+greetingIt: String = "Ciao Scala! This is "
+
+scala> println(greetingEng + name)
+Hello Scala! This is Alexander Gorshkov
+
+scala> println(greetingEsp + name)
+Hola Scala! This is Alexander Gorshkov
+
+scala> println(greetingIt + name)
+Ciao Scala! This is Alexander Gorshkov
+
+scala> println(greetingEng + name.reverse)
+Hello Scala! This is vokhsroG rednaxelA
+
+scala> println(greetingEsp + name.reverse)
+Hola Scala! This is vokhsroG rednaxelA
+
+scala> println(greetingIt + name.reverse)
+Ciao Scala! This is vokhsroG rednaxelA
