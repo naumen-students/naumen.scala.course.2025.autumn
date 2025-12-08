@@ -13,9 +13,42 @@ import java.io.{BufferedReader, BufferedWriter, FileReader, FileWriter}
 
 object ResuourceTraining extends ZIOAppDefault {
 
-  def readData(filePath: String): IO[Throwable, String] = ???
+  def readData(filePath: String): IO[Throwable, String] =  {
+    val acquire: IO[Throwable, BufferedReader] =
+      ZIO.attempt(new BufferedReader(new FileReader(filePath)))
 
-  def writeData(filePath: String, data: String): ZIO[Any, Nothing, Unit] = ???
+    val release: BufferedReader => ZIO[Any, Nothing, Unit] =
+      reader => ZIO.attempt(reader.close()).ignore
+
+    val use: BufferedReader => IO[Throwable, String] =
+      reader => ZIO.attempt {
+        val content = new StringBuilder
+        var line: String = null
+        while ({line = reader.readLine(); line != null}) {
+          content.append(line)
+        }
+        content.toString()
+      }
+
+    ZIO.acquireReleaseWith(acquire)(release)(use)
+  }
+
+  def writeData(filePath: String, data: String): ZIO[Any, Nothing, Unit] = {
+    val acquire: ZIO[Any, Throwable, BufferedWriter] =
+      ZIO.attempt(new BufferedWriter(new FileWriter(filePath)))
+
+    val release: BufferedWriter => ZIO[Any, Nothing, Unit] =
+      writer => ZIO.attempt(writer.close()).ignore
+
+    val use: BufferedWriter => ZIO[Any, Nothing, Unit] =
+      writer => ZIO.attempt {
+        writer.write(data)
+        writer.flush()
+      }.catchAll(_ => ZIO.unit)
+
+    ZIO.acquireReleaseWith(acquire)(release)(use).catchAll(_ => ZIO.unit)
+  }
+
 
   override def run: ZIO[Any with ZIOAppArgs with Scope, Any, Any] = ZIO.succeed("Done")
 }
