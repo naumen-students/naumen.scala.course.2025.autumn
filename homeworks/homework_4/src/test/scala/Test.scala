@@ -5,7 +5,7 @@ import scala.util.Random
 object Test extends TestSuite {
     lazy val randomLength = Random
     def generateRandomList(maxListSize: Int) = {
-        val listLength = Random.nextInt(maxListSize)
+        val listLength = Random.nextInt(maxListSize) + 2 // т.к. может быть 0
         List.fill(listLength)(Random.nextInt)
     }
     override def tests: Tests = Tests {
