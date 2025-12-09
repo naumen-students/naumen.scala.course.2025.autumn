@@ -24,9 +24,52 @@ object Task3 extends App {
 
   case class Count(word: String, count: Int)
   case class WordsCount(count: Seq[Count])
+
   object WordsCount {
-    implicit val monoid: Monoid[WordsCount] = ???
+    private def toMap(wc: WordsCount): Map[String, Int] =
+      wc.count
+        .groupBy(_.word)
+        .map { case (word, counts) =>
+          word -> counts.map(_.count).sum
+        }
+
+    private def fromMap(m: Map[String, Int]): WordsCount =
+      WordsCount(
+        m.toSeq
+          .sortBy(_._1)                 // стабильный порядок
+          .map { case (w, c) => Count(w, c) }
+      )
+
+    implicit val monoid: Monoid[WordsCount] = new Monoid[WordsCount] {
+      override def empty: WordsCount = WordsCount(Seq.empty)
+
+      override def combine(a: WordsCount, b: WordsCount): WordsCount = {
+        val am = toMap(a)
+        val bm = toMap(b)
+
+        val merged = (am.keySet ++ bm.keySet).iterator.map { k =>
+          k -> (am.getOrElse(k, 0) + bm.getOrElse(k, 0))
+        }.toMap
+
+        fromMap(merged)
+      }
+    }
   }
 
-  def countWords(lines: Vector[String]): WordsCount = ???
+  private def countsFromLine(line: String): WordsCount = {
+    val counts =
+      line
+        .split("\\s+")
+        .iterator
+        .filter(_.nonEmpty)
+        .map(word => Count(word, 1))
+        .toSeq
+
+    WordsCount(counts)
+  }
+
+  def countWords(lines: Vector[String]): WordsCount = {
+    val future = mapReduce(lines)(countsFromLine)
+    Await.result(future, 10.seconds)
+  }
 }
