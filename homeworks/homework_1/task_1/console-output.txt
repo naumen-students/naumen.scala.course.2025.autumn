@@ -1,0 +1,45 @@
+Last login: Sun Sep 21 11:29:08 on ttys000
+egorgrisin@MacBook-Air-2 ~ % amm
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by scala.runtime.LazyVals$ (file:/opt/homebrew/Cellar/ammonite-repl/3.0.2/libexec/bin/amm)
+WARNING: Please consider reporting this to the maintainers of class scala.runtime.LazyVals$
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+Loading...
+Welcome to the Ammonite Repl 3.0.2 (Scala 3.3.5 Java 25)
+@
+
+
+@ val name = "Egor Grishin"
+name: String = "Egor Grishin"
+
+@ val greeting = "Hello"
+greeting: String = "Hello"
+
+@ println(s"$greeting Scala! This is $name")
+Hello Scala! This is Egor Grishin
+
+
+@ val greeting = "Bonjour"
+greeting: String = "Bonjour"
+
+@ println(s"$greeting Scala! This is $name")
+Bonjour Scala! This is Egor Grishin
+
+
+@ val greeting = "Hola"
+greeting: String = "Hola"
+
+@ println(s"$greeting Scala! This is $name")
+Hola Scala! This is Egor Grishin
+
+@ val reversedName = name.reverse
+reversedName: String = "nihsirG rogE"
+
+@ val greetings = List("Hello", "Bonjour", "Hola")
+greetings: List[String] = List("Hello", "Bonjour", "Hola")
+
+
+@ greetings.foreach(arg => println(s"$arg Scala! This is $reversedName"))
+Hello Scala! This is nihsirG rogE
+Bonjour Scala! This is nihsirG rogE
+Hola Scala! This is nihsirG rogE

@@ -1,0 +1,14 @@
+egorgrisin@MacBook-Air-2 homework_1_task_3 % sbt run
+[info] welcome to sbt 1.11.6 (Homebrew Java 25)
+[info] loading project definition from /Users/egorgrisin/IdeaProjects/homework_1_task_3/project
+[info] loading settings for project root from build.sbt...
+[info] set current project to homework_1_task_3 (in build file:/Users/egorgrisin/IdeaProjects/homework_1_task_3/)
+[info] compiling 1 Scala source to /Users/egorgrisin/IdeaProjects/homework_1_task_3/target/scala-3.3.6/classes ...
+[info] running example.Main
+Hello Scala! This is Egor Grishin
+Bonjour Scala! This is Egor Grishin
+Hola Scala! This is Egor Grishin
+Hello Scala! This is nihsirG rogE
+Bonjour Scala! This is nihsirG rogE
+Hola Scala! This is nihsirG rogE
+[success] Total time: 2 s, completed 21 сент. 2025 г., 13:08:06
