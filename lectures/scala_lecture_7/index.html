@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/white.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<!-- <link rel="stylesheet" href="plugin/highlight/monokai.css"> -->
+		<link rel="stylesheet" href="naumen-custom-css/custom.css">
+		<link rel="stylesheet" href="naumen-custom-css/vs.css" id="highlight-theme">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="footer">
+				<span class="corp-name"><b>NAUMEN</b></span>
+			</div>
+			<div class="slides">
+				<section>
+					<h2>ZIO</h2>
+					<h3><span class="corp-name">Ассинхронность и многоточность</span></h3>
+					<h3><span class="corp-name">Управление ресурсами</span></h3>
+					<p>Рахимжанов Тимур</p>
+				</section>
+				<section>
+					<h3>Разница на примере задачи</h3>
+					<p>
+						Вам нужно выкопать во дворе бассейн<br/>
+						Вы взяли лопату и копаете. Это однопоточная работа
+					</p>
+				</section>
+				<section>
+					<img src="images/multthread.svg"/>
+				</section>
+				<section>
+					<h3>Параллельное исполнение</h3>
+					<p>
+						Параллельное исполнение подразумевает наличие <br><strong class="naumen">более одного</strong>
+						вычислительного устройства<br>(например, процессора), <br/>
+						которые будут <strong class="naumen">одновременно</strong> выполнять несколько задач
+					</p>
+				</section>
+				<section>
+					<h3>Параллельное исполнение</h3>
+					<h4>Пример</h4>
+					<p>
+						Пока вы копаете бассейн, Вася копает канаву под водопровод. <br/>
+						Никто никому не мешает. Это параллельное исполнение
+					</p>
+				</section>
+				<section>
+					<h3>Конкурентное исполнение</h3>
+					<p>
+						Это один из способов реализации исполнения путем выделения <br/>
+						абстракции "рабочего потока" (worker thread)
+					</p>
+				</section>
+				<section>
+					<h3>Конкурентное исполнение</h3>
+					<h4>Пример</h4>
+					<p>
+						Вы пригласили друга Васю и копаете вместе, <br/>
+						периодически задевая друг-друга лопатами
+					</p>
+				</section>
+				<section>
+					<h3>Ассинхронное исполнение</h3>
+					<p>
+						Подразумевает, что операция может быть выполнена <br>кем-то на стороне: <br>
+						удаленным веб-узлом, сервером или другим устройством <br>
+						за пределами текущего вычислительного устройства
+					</p>
+				</section>
+				<section>
+					<h3>Ассинхронное исполнение</h3>
+					<h4>Пример</h4>
+					<p>
+						 Вы пригласили бригаду землекопов, а сами отдыхаете. <br>
+						 Когда бригада все сделает, к вам придут за деньгами. <br>
+						 Это асинхронная работа
+					</p>
+				</section>
+				<section>
+					<h2>Базовые возможности concurrency в Scala</h2>
+				</section>
+				<section>
+					<h3>Future</h3>
+					<blockquote><p>
+						Futures provide a way to reason about performing <br>
+						many operations in parallel – in an efficient and non-blocking way.
+					</p></blockquote>
+					<p>(c) documentation</p>
+				</section>
+				<section>
+					<h3>Future</h3>
+					<blockquote><p>
+						Futures provide a way to reason about performing <br>
+						many operations in parallel – in an efficient and non-blocking way.
+					</p></blockquote>
+					<p>(c) documentation</p>
+				</section>
+				<section>
+					<h3>Future</h3>
+					<p>
+						<ul>
+						<li>Неблокирующие, используют callback'и</li>
+						<li>Цепочку из нескольких Future можно комбинировать через map/flatMap</li>
+						</ul>
+					</p>
+					<pre data-id="side-effect-animation"><code class="scala" style="max-height: none;" 
+						data-trim data-noescape data-line-numbers="1-7|2|3|4|5-7">
+						val getTopAuthors: Future[Seq[Author]] = for {
+							books: Seq[Book]      <- bookService.getTop10()
+							authorIds: Seq[String] = books.map(_.authorId)
+							authors: Seq[Author]  <- authorService.getByIds(authorIds)
+						} yield {
+							authors
+						}
+					</code></pre>
+				</section>
+				<section>
+					<h3>Execution context</h3>
+					<p>
+						<ul>
+							<li>Future запускается в рамках контекста исполнения</li>
+							<li>Вычисления выполняются в новом потоке, в потоке из пула или в текущем</li>
+							<li>Существует фиксированный глобальный контекст - используется по умолчанию</li>
+							<li>Можно создавать свои контексты исполнения со своими пулами потоков</li>
+						</ul>
+					</p>
+				</section>
+				<section>
+					<h3>Параллельная обработка коллекций</h3>
+						<pre data-id="side-effect-animation"><code class="scala" style="font-size: 1.5em !important; line-height: 1.4;" data-trim data-noescape data-line-numbers>
+							val lst = someList()
+
+							lst.map(hardElementOperation(_))
+							lst.par.map(hardElementOperation(_))
+						</code></pre>
+	 			</section>
+				<section>
+					<h3>Overhead при работе с потоками</h3>
+					<ul>
+						<li>Выделение потока дорогостоящая операция</li>
+						<li>Содержание потока ресурсоёмко</li>
+						<li>Переключеие между потоками занимает время</li>
+						<li>Отсутствие возможности композиции</li>
+					</ul>
+				</section>						
+				<section>
+					<h3>Green threads - альтернатива классическим потокам</h3>
+					<ul>
+						<li>Управляет ВМ, а не система</li>
+						<li>Управление происходит в пространстве пользователя, а не ядра</li>
+						<li>Значительно превосходят встроенные потоки Linux-системы <br>по времени активации потоков и синхронизации</li>
+					</ul>
+				</section>
+				<section>
+					<h3>ZIO Fibers</h3>
+					<ul>
+						<li>Можно рассматривать как <span class="naumen">виртуальный</span> поток</li>
+						<li>Аналог java.lang.Thread, но <span class="naumen">производительнее</span></li>
+						<li><span class="naumen">Один поток JVM</span> будет исполнять <span class="naumen">несколько файберов</span></li>
+					</ul>
+				</section>
+				<section>
+					<img src="images/fibers.svg" height="800"/>
+				</section>
+				<section>
+					<h3>ZIO Fibers. Преимущества</h3>
+					<ul>
+						<li>Неограниченное к-во потоков</li>
+						<li>Легковесность</li>
+						<li>Возможность компоновки</li>
+						<li>Безопасное прерывание потока</li>
+						<li>Иерархия потоков</li>
+					</ul>
+				</section>
+				<section>
+					<h3>ZIO Fibers. Типы данных</h3>
+					<ul>
+						<li><strong>Fiber</strong> - сам виртуальный поток</li>
+						<li><strong>Fiber.Status</strong> - текущее состояние потока</li>
+						<li><strong>FiberId</strong> - уникальный идентификатор потока</li>
+					</ul>
+				</section>
+				<section data-auto-animate>
+					<h3>ZIO Fibers. Пример</h3>
+					<pre data-id="side-effect-animation"><code class="scala" style="max-height: none; " data-trim data-noescape data-line-numbers="1-7|1-2|4-7|5|6|1-7">
+private def boilWater(): ZIO[Any, Nothing, Unit] = {...}
+private def fryEggs(): ZIO[Any, Nothing, Unit] = {...}
+
+def makeBreakfast: ZIO[Any, Nothing, Unit] = for {
+    waterFiber <- boilWater()
+    eggsFiber <- fryEggs()
+} yield ()
+					</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h3>ZIO Fibers. Пример</h3>
+					<pre data-id="side-effect-animation"><code class="scala" style="max-height: none; " data-trim data-noescape data-line-numbers>
+private def boilWater(): ZIO[Any, Nothing, Unit] = {...}
+private def fryEggs(): ZIO[Any, Nothing, Unit] = {...}
+
+def makeBreakfast: ZIO[Any, Nothing, Unit] = for {
+    waterFiber <- boilWater().fork
+    eggsFiber <- fryEggs().fork
+} yield ()
+					</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h3>ZIO Fibers. Пример</h3>
+					<pre data-id="side-effect-animation"><code class="scala" style="max-height: none; " data-trim data-noescape data-line-numbers>
+private def boilWater(): ZIO[Any, Nothing, Unit] = {...}
+private def fryEggs(): ZIO[Any, Nothing, Unit] = {...}
+
+def makeBreakfast: ZIO[Any, Nothing, Unit] = for {
+    waterFiber <- boilWater().fork
+    eggsFiber <- fryEggs().fork
+    _ <- waterFiber.zip(eggsFiber).await
+} yield ()
+					</code></pre>
+				</section>
+				<section>
+					<h3>ZIO Fibers. Основные функции</h3>
+					<ul>
+						<li>fork</li>
+						<li>forkDaemon</li>
+						<li>await</li>
+						<li>join</li>
+						<li>interrupt</li>
+					</ul>
+				</section>
+				<section>
+					<h3>ZIO to Fibers</h3>
+					<ul>
+						<li>race</li>
+						<li>zipPar</li>
+						<li>foreachPar</li>
+						<li>reduceAllPar</li>
+					</ul>
+				</section>
+				<section>
+					<h3>ZIO Fibers. Прерывание потока</h3>
+					<h4>Причины</h4>
+					<ul>
+						<li>Нет необхоидмости дожидаться поток <br>
+							(например, нужен результат только того, кто завершился вперед)</li>
+						<li>Прерывать при превышении определенного времени выполнения</li>
+						<li>Отмета выполнения пользователем (интерактивные приложения)</li>
+					</ul>
+				</section>
+				<section>
+					<h3>ZIO Fibers. Прерывание потока</h3>
+					<h4>Способы</h4>
+					<ul>
+						<li>Полуасинхронное прерывание (опрос для прерывания) - <br>
+							поток сам периодечески проверяет, нет ли ему команды на остановку</li>
+						<li>Асинхронное прерывание — поток позволяет прервать другой поток</li>
+					</ul>
+				</section>
+				<section data-auto-animate>
+					<h3>ZIO Fibers. Прерывание потока</h3>
+					<h4>Fiber#interrupt</h4>
+					<pre data-id="side-effect-animation"><code class="scala" style="max-height: none; " data-trim data-noescape data-line-numbers="|1-6|2|3|4|5|8-13|9|10|11|12|">
+						def task = for {
+							fn <- ZIO.fiberId.map(_.threadName)
+							_ <- ZIO.debug(s"$fn starts a long running task")
+							_ <- ZIO.sleep(1.minute)
+							_ <- ZIO.debug("done!")
+						} yield ()
+
+						def run = for {
+							f <- task
+								.onInterrupt(ZIO.debug(s"Task interrupted while running"))
+								.fork
+							_ <- f.interrupt
+						} yield ()
+					</code></pre>
+				</section>
+				<section>
+					<h3>ZIO Fibers. Прерывание потока</h3>
+					<h4>Прерывание блокирующих операций</h4>
+					<pre data-id="side-effect-animation"><code class="scala" style="max-height: none; " data-trim data-noescape data-line-numbers>
+						for {
+							fiber <- ZIO.attemptBlocking {
+								while (true) {
+									Thread.sleep(1000)
+									println("Doing some blocking operation")
+								}
+							}.ensuring(
+								Console.printLine("End of a blocking operation").orDie
+							).fork
+
+							_ <- fiber.interrupt.schedule(
+								Schedule.delayed(
+									Schedule.duration(1.seconds)
+								)
+							)
+						} yield ()
+					</code></pre>
+				</section>
+				<section>
+					<h3>ZIO Ресурсы, ZManaged</h3>
+					<p><span class="naumen">ZManaged[R, E, A]</span> - это управляемый ресурс, <br/>
+						который требует <span class="naumen">R</span> и может завершиться сбоем с <span class="naumen">E</span> значением <br>
+						или завершиться успешно с <span class="naumen">A</span>
+					</p>
+				</section>
+				<section>
+					<h3>ZIO Ресурсы, ZManaged</h3>
+					<p>Это структура данных, которая инкапсулирует получение и <br>
+						высвобождение ресурса, который может быть использован <br>
+						путем вызова метода <span class="naumen">use</span> ресурса. <br>
+						Ресурс будет автоматически захвачен до использования и автоматически освобожден после использования</p>
+				</section>
+				<section>
+					<h3>ZIO Ресурсы, ZManaged</h3>
+					<pre data-id="side-effect-animation"><code class="scala" style="max-height: none; font-size: 1.5em !important; line-height: 1.4;" data-trim data-noescape data-line-numbers>
+						val managed = ZManaged.make(acquire)(release)
+					</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h3>ZIO Ресурсы, ZManaged</h3>
+					<pre data-id="side-effect-animation"><code class="scala" style="max-height: none; " data-trim data-noescape data-line-numbers="|3-7|3-5|7|9-11">
+						def printFirstLine(file: String): ZIO[Console, Throwable, Unit] = {
+						
+							def acquire(file: String) = ZIO.effect(
+								new BufferedReader(new FileReader(file))
+							)
+							
+							def release(reader: BufferedReader) = ZIO.effectTotal(reader.close())
+							
+							ZManaged.make(acquire(file))(release).use { reader =>
+								putStrLn(reader.readLine())
+							}
+						}
+					</code></pre>
+				</section>
+				<section>
+					<h3>ZIO Ресурсы, ZManaged</h3>
+					<p>Каждый ZIO эффект может быть преобразован к <span class="naumen">ZManaged</span> с помощью <span class="naumen">ZManaged.fromEffect</span> или <span class="naumen">ZIO#toZManaged_</span></p>
+					<pre data-id="side-effect-animation"><code class="scala" style="max-height: none;" data-trim data-noescape data-line-numbers>
+						val managedHello = ZManaged.fromEffect(putStrLn("Hello, World!"))
+						val managedHello_ = putStrLn("Hello, World!").toManaged_
+					</code></pre>
+				</section>
+				<section>
+					<h3>ZIO Ресурсы, ZManaged</h3>
+					<p>Если ресурс реализовал AutoClosable интерфейс, мы можем легко создать <span class="naumen">ZManaged</span> из него, 
+						используя <span class="naumen">ZManaged.fromAutoClosable</span> конструктор: </p>
+					<pre data-id="side-effect-animation"><code class="scala" style="max-height: none; font-size: 1.5em !important; line-height: 1.4;" data-trim data-noescape data-line-numbers="|1-3|5-7|9-11|">
+						ZManaged.fromAutoCloseable(ZIO.effect(
+							new FileInputStream("file.txt")
+						))
+
+						ZManaged.fromAutoCloseable(ZIO.effect(
+							fromResource("file.txt")
+						))
+
+						ZManaged.fromAutoCloseable(ZIO.effect(
+							fromFile("file.txt")
+						))
+					</code></pre>
+				</section>
+				<section>
+					<h3>ZIO Ресурсы, ZManaged</h3>
+					<h4>Применение</h4>
+					<pre data-id="side-effect-animation"><code class="scala" style="max-height: none;" data-trim data-noescape data-line-numbers>
+						def firstLine(file: String): ZIO[Console, Throwable, Unit] =
+							ZManaged
+								.fromAutoCloseable(ZIO.effect(fromFile(file)))
+								.use { reader =>
+									putStrLn(reader.bufferedReader().readLine())
+								}
+					</code></pre>
+				</section>
+				<section>
+					<h3>ZIO Ресурсы, ZManaged</h3>
+					<h4>Применение</h4>
+					<p>
+						Если наш управляемый ресурс может быть действительным после освобождения ресурсов, мы можем преобразовать этот <span class="naumen">ZManaged</span> в ZIO эффект, вызвав <span class="naumen">ZManaged#useNow</span>
+					</p>
+				</section>
+				<section>
+					<h3>ZIO Ресурсы, ZManaged</h3>
+					<h4>Применение</h4>
+					<p>
+						Предположим, мы собираемся сделать управляемый ресурс долгоживущим. <span class="naumen">ZManaged#useForever</span> преобразует <span class="naumen">ZManaged</span> в ZIO эффект, который будет доступен вечно
+					</p>
+				</section>
+				<section>
+					<h3>ZIO Ресурсы, ZManaged</h3>
+					<h4>Комбинаторы</h4>
+					<ul>
+						<li>ensuringFirst - добавляет дополнительный финализатор перед основным</li>
+						<li>onExitFirst - похож на ensuringFirst, но имеет доступ к результату</li>
+					</ul>
+				</section>
+				<section>
+					<h3>ZIO Ресурсы, ZManaged</h3>
+					<h4>Комбинаторы</h4>
+					<ul>
+						<li>withEarlyRelease - создает новый ZManaged с возможностью бытсрого вызова основного финализатора</li>
+						<li>withEarlyReleaseExit - похож на withEarlyRelease, но позволяет указать выходное значение</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Спасибо за внимание!</h3>
+					<br>
+					<h3>Вопросы?</h3>
+				</section>
+		</div>
+	</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				hash: true,
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: true,
+				transition: 'none',
+				// The "normal" size of the presentation, aspect ratio will
+				// be preserved when the presentation is scaled to fit different
+				// resolutions. Can be specified using percentage units.
+				width: '1280',
+				height: '1125',
+
+				// Factor of the display size that should remain empty around
+				// the content
+				margin: 0.04,
+
+				// Bounds for smallest/largest possible scale to apply to content
+				minScale: 0.2,
+				maxScale: 3,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+
+			window.addEventListener("mousedown", handleClick, false);
+			window.addEventListener("contextmenu", function (e) {
+				e.preventDefault();
+			}, false);
+
+			function handleClick(e) {
+				e.preventDefault();
+				if (e.button === 0) Reveal.next();
+				if (e.button === 2) Reveal.prev();
+			}
+		</script>
+	</body>
+</html>
