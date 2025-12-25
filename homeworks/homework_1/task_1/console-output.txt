@@ -1,0 +1,23 @@
+ant.s.novikov@macbook-C02G89QDMD6R naumen.scala.course.2025.autumn % amm
+Loading...
+Welcome to the Ammonite Repl 3.0.2 (Scala 3.3.5 Java 17.0.16)
+@ def print(name: String, words: List[String]): Unit = words.foreach(word => println(s"$word Scala! This is $name"))
+defined function print
+
+@ val name = "Anton Novikov"; val word = List("Hello"); print(name, word)
+Hello Scala! This is Anton Novikov
+name: String = "Anton Novikov"
+word: List[String] = List("Hello")
+
+@ val words = List("Halo", "Guten Tag"); print(name, words)
+Halo Scala! This is Anton Novikov
+Guten Tag Scala! This is Anton Novikov
+words: List[String] = List("Halo", "Guten Tag")
+
+@ print(name.reverse, word ++ words)
+Hello Scala! This is vokivoN notnA
+Halo Scala! This is vokivoN notnA
+Guten Tag Scala! This is vokivoN notnA
+
+
+@
