@@ -1,0 +1,39 @@
+PS C:\Users\dubon\IdeaProjects\naumen.scala.course.2025.autumn> scala
+Welcome to Scala 2.13.16 (Java HotSpot(TM) 64-Bit Server VM, Java 20.0.2).
+Type in expressions for evaluation. Or try :help.
+
+scala> val name = "Kirill Kostogryzov"
+val name: String = Kirill Kostogryzov
+
+scala> val english = "Hello"
+val english: String = Hello
+
+scala> val french = "Salut"
+val french: String = Salut
+
+scala> val spanish = "Hola"
+val spanish: String = Hola
+
+scala> def sayhello(greetings: String, name: String): Unit = println(s"$greetings Scala! This is $name")
+def sayhello(greetings: String, name: String): Unit
+
+scala> sayhello(english, name)
+Hello Scala! This is Kirill Kostogryzov
+
+scala> sayhello(french, name)
+Salut Scala! This is Kirill Kostogryzov
+
+scala> sayhello(spanish, name)
+Hola Scala! This is Kirill Kostogryzov
+
+scala> val reverse = name.reverse
+val reverse: String = vozyrgotsoK lliriK
+
+scala> sayhello(english, reverse)
+Hello Scala! This is vozyrgotsoK lliriK
+
+scala> sayhello(french, reverse)
+Salut Scala! This is vozyrgotsoK lliriK
+
+scala> sayhello(spanish, reverse)
+Hola Scala! This is vozyrgotsoK lliriK
