@@ -1,0 +1,48 @@
+"C:\Program Files\Java\jdk1.8.0_231\bin\java.exe" -server -Xmx1536M -Dsbt.supershell=false -Djdk.console=java.base -Dgrouping.with.qualified.names.enabled=true -Dseparate.prod.test.sources.enabled=true -Didea.managed=true -Dfile.encoding=UTF-8 "-Didea.installation.dir=C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2025.2.2" -Dsbt.log.noformat=true -jar C:\Users\Админ\AppData\Roaming\JetBrains\IdeaIC2025.2\plugins\Scala\launcher\sbt-launch.jar early(addPluginSbtFile=\"\"\"C:\Users\Админ\AppData\Local\Temp\idea10.sbt\"\"\") idea-shell
+[info] welcome to sbt 1.11.6 (Oracle Corporation Java 1.8.0_231)
+[info] loading global plugins from C:\Users\╨Р╨┤╨╝╨╕╨╜\.sbt\1.0\plugins
+[info] loading settings for project untitled10-build from idea10.sbt...
+[info] loading project definition from C:\Users\╨Р╨┤╨╝╨╕╨╜\IdeaProjects\untitled10\project
+[info] loading settings for project root from build.sbt...
+[info] set current project to untitled10 (in build file:/C:/Users/╨Р╨┤╨╝╨╕╨╜/IdeaProjects/untitled10/)
+[IJ]~run
+[info] sbt server started at local:sbt-server-26a84867a5ee6bcc83d1
+Exception in thread "sbt-socket-server" java.nio.file.InvalidPathException: Illegal char <?> at index 9: C:\Users\?????\AppData\Local\Coursier\cache\arc\https\github.com\adoptium\temurin11-binaries\releases\download\jdk-11.0.28%252B6\OpenJDK11U-jdk_x64_windows_hotspot_11.0.28_6.zip\jdk-11.0.28+6\bin
+        at sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:182)
+        at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:153)
+        at sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:77)
+        at sun.nio.fs.WindowsPath.parse(WindowsPath.java:94)
+        at sun.nio.fs.WindowsFileSystem.getPath(WindowsFileSystem.java:255)
+        at java.nio.file.Paths.get(Paths.java:84)
+        at sbt.internal.bsp.BuildServerConnection$.$anonfun$sbtScriptInPath$2(BuildServerConnection.scala:71)
+        at scala.collection.TraversableLike.$anonfun$map$1(TraversableLike.scala:286)
+        at scala.collection.IndexedSeqOptimized.foreach(IndexedSeqOptimized.scala:36)
+        at scala.collection.IndexedSeqOptimized.foreach$(IndexedSeqOptimized.scala:33)
+        at scala.collection.mutable.ArrayOps$ofRef.foreach(ArrayOps.scala:198)
+        at scala.collection.TraversableLike.map(TraversableLike.scala:286)
+        at scala.collection.TraversableLike.map$(TraversableLike.scala:279)
+        at scala.collection.mutable.ArrayOps$ofRef.map(ArrayOps.scala:198)
+        at sbt.internal.bsp.BuildServerConnection$.$anonfun$sbtScriptInPath$1(BuildServerConnection.scala:71)
+        at scala.Option.map(Option.scala:230)
+        at sbt.internal.bsp.BuildServerConnection$.sbtScriptInPath(BuildServerConnection.scala:71)
+        at sbt.internal.bsp.BuildServerConnection$.$anonfun$writeConnectionFile$1(BuildServerConnection.scala:33)
+        at scala.Option.orElse(Option.scala:447)
+        at sbt.internal.bsp.BuildServerConnection$.writeConnectionFile(BuildServerConnection.scala:33)
+        at sbt.internal.server.Server$$anon$1$$anon$2.run(Server.scala:106)
+[warn] sbt server could not start in 10s
+[info] compiling 1 Scala source to C:\Users\╨Р╨┤╨╝╨╕╨╜\IdeaProjects\untitled10\target\scala-3.3.6\classes ...
+[info] done compiling
+[info] running Main
+╨Р╨╜╤П
+[success] Total time: 8 s, completed 26.09.2025 23:58:18
+[info] 1. Monitoring source files for root/run...
+[info]    Press <enter> to interrupt or '?' for more options.
+[info] Build triggered by C:\Users\╨Р╨┤╨╝╨╕╨╜\IdeaProjects\untitled10\src\main\scala\Main.scala. Running 'run'.
+[info] compiling 1 Scala source to C:\Users\╨Р╨┤╨╝╨╕╨╜\IdeaProjects\untitled10\target\scala-3.3.6\classes ...
+[info] done compiling
+
+Multiple main classes detected. Select one to run:
+ [1] Main
+ [2] Privetstvie
+
+Enter number:
