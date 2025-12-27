@@ -1,0 +1,37 @@
+Welcome to Scala 2.12.10 (OpenJDK 64-Bit Server VM, Java 17.0.9).
+Type in expressions for evaluation. Or try :help.
+
+scala> val myName = "Мария Гусева"
+myName: String = ╠рЁш  ├єёхтр
+
+scala> val myGreeting = s"Привет, Скала! Это $myName"
+myGreeting: String = ╧ЁштхЄ, ╤ърыр! ▌Єю ╠рЁш  ├єёхтр
+
+scala> println(myGreeting)
+Привет, Скала! Это Мария Гусева
+
+scala>
+
+scala> val greetingsList = List("Приветик", "Aloha", "Ciao")
+greetingsList: List[String] = List(╧ЁштхЄшъ, Aloha, Ciao)
+
+scala> greetingsList.foreach { g =>
+     |   val newGreeting = s"$g, Скала! Это $myName"
+     |   println(newGreeting)
+     | }
+Приветик, Скала! Это Мария Гусева
+Aloha, Скала! Это Мария Гусева
+Ciao, Скала! Это Мария Гусева
+
+scala>
+
+scala> val reversedName = myName.reverse
+reversedName: String = ртхёє├  шЁр╠
+
+scala> greetingsList.foreach { g =>
+     |   val reversedGreeting = s"$g, Скала! Это $reversedName"
+     |   println(reversedGreeting)
+     | }
+Приветик, Скала! Это авесуГ яираМ
+Aloha, Скала! Это авесуГ яираМ
+Ciao, Скала! Это авесуГ яираМ
