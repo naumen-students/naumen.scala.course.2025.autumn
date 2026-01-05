@@ -1,7 +1,7 @@
 package ru.dru
 
 import zio.CanFail.canFailAmbiguous1
-import zio.{Duration, Exit, Fiber, Scope, ZIO, ZIOApp, ZIOAppArgs, ZIOAppDefault, durationInt}
+import zio.{Duration, Exit, Task, Scope, ZIO, ZIOApp, ZIOAppArgs, ZIOAppDefault, durationInt}
 
 import java.time.LocalDateTime
 import scala.concurrent.TimeoutException
@@ -9,7 +9,24 @@ import scala.concurrent.TimeoutException
 case class SaladInfoTime(tomatoTime: Duration, cucumberTime: Duration)
 
 
+
 object Breakfast extends ZIOAppDefault {
+
+  private def boilWater(waterBoilingTime: Duration): ZIO[Any, Nothing, LocalDateTime] =
+    ZIO.sleep(waterBoilingTime) *> ZIO.succeed(LocalDateTime.now())
+
+  private def fryEggs(eggsFiringTime: Duration): ZIO[Any, Nothing, LocalDateTime] =
+    ZIO.sleep(eggsFiringTime) *> ZIO.succeed(LocalDateTime.now())
+
+  private def cutSalad(saladInfoTime: SaladInfoTime): ZIO[Any, Nothing, LocalDateTime] =
+    for {
+      _ <- ZIO.sleep(saladInfoTime.cucumberTime)
+      _ <- ZIO.sleep(saladInfoTime.tomatoTime)
+      saladEndTime <- ZIO.succeed(LocalDateTime.now())
+    } yield saladEndTime
+
+  private def brewTea(teaBrewingTime: Duration): ZIO[Any, Nothing, LocalDateTime] =
+    ZIO.sleep(teaBrewingTime) *> ZIO.succeed(LocalDateTime.now())
 
   /**
    * Функция должна эмулировать приготовление завтрака. Продолжительные операции необходимо эмулировать через ZIO.sleep.
@@ -32,7 +49,26 @@ object Breakfast extends ZIOAppDefault {
   def makeBreakfast(eggsFiringTime: Duration,
                     waterBoilingTime: Duration,
                     saladInfoTime: SaladInfoTime,
-                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = ???
+                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] =
+    for {
+      waterTask <- boilWater(waterBoilingTime).fork
+      eggsTask <- fryEggs(eggsFiringTime).fork
+      saladTask <- cutSalad(saladInfoTime).fork
+
+      waterEndTime <- waterTask.join
+
+      teaTask <- brewTea(teaBrewingTime).fork
+
+      eggsEndTime <- eggsTask.join
+      saladEndTime <- saladTask.join
+      teaEndTime <- teaTask.join
+
+    } yield Map(
+      "eggs" -> eggsEndTime,
+      "water" -> waterEndTime,
+      "saladWithSourCream" -> saladEndTime,
+      "tea" -> teaEndTime
+    )
 
 
 

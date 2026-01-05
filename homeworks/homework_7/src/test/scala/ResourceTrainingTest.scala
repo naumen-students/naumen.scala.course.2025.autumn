@@ -7,9 +7,9 @@ import zio._
 
 import java.io.{BufferedReader, BufferedWriter, FileReader, FileWriter}
 
-object ResuourceTrainingTest extends ZIOSpecDefault {
+object ResourceTrainingTest extends ZIOSpecDefault {
 
-  override def spec: Spec[TestEnvironment with Scope, Any] = suite("ResuourceTraining") (
+  override def spec: Spec[TestEnvironment with Scope, Any] = suite("ResourceTraining") (
     test("test reader 1") {
       for {
         _ <- ZIO.acquireReleaseWith(ZIO.succeed(
@@ -19,7 +19,7 @@ object ResuourceTrainingTest extends ZIOSpecDefault {
           ZIO.succeed(writer.write("Hello, world!")).map(_ => writer.flush())
         }
 
-        data <- ResuourceTraining.readData("in.txt")
+        data <- ResourceTraining.readData("in.txt")
       } yield {
         assertTrue(data == "Hello, world!")
       }
@@ -35,7 +35,7 @@ object ResuourceTrainingTest extends ZIOSpecDefault {
           ZIO.succeed(writer.write("Hello, world! Byeeee!")).map(_ => writer.flush())
         }
 
-        data <- ResuourceTraining.readData("in2.txt")
+        data <- ResourceTraining.readData("in2.txt")
       } yield {
         assertTrue(data == "Hello, world! Byeeee!")
       }
@@ -46,7 +46,7 @@ object ResuourceTrainingTest extends ZIOSpecDefault {
     test("writer1") {
       for {
 
-        _ <- ResuourceTraining.writeData("out.txt", "Hello, world")
+        _ <- ResourceTraining.writeData("out.txt", "Hello, world")
 
         data <- ZIO.acquireReleaseWith(ZIO.succeed(
           new BufferedReader(new FileReader("out.txt"))))(reader =>
@@ -64,7 +64,7 @@ object ResuourceTrainingTest extends ZIOSpecDefault {
     test("writer2") {
       for {
 
-        _ <- ResuourceTraining.writeData("out2.txt", "Hello, world! My name is Vasya")
+        _ <- ResourceTraining.writeData("out2.txt", "Hello, world! My name is Vasya")
 
         data <- ZIO.acquireReleaseWith(ZIO.succeed(
           new BufferedReader(new FileReader("out2.txt"))))(reader =>
