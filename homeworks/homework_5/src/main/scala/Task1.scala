@@ -30,24 +30,46 @@ object Task1 extends App {
   sealed trait Cat {
     def name: String
   }
+
   case class VeryLittleCat(name: String) extends Cat
+
   case class LittleCat(name: String) extends Cat
+
   case class NormalCat(name: String) extends Cat
+
   case class BigCat(name: String) extends Cat
+
   case class VeryBigCat(name: String) extends Cat
 
   sealed trait Box[+A] {
     def value: A
   }
+
   case class BoxWith[+A](value: A) extends Box[A]
+
   case object EmptyBox extends Box[Nothing] {
     override def value: Nothing = throw new Exception("Empty box!")
   }
 
   object ShowInstance {
-    implicit val catShow: Show[Cat] = ???
+    implicit val catShow: Show[Cat] = (c: Cat) => c match {
+      case VeryLittleCat(name) => s"очень маленький кот $name"
+      case LittleCat(name) => s"маленький кот $name"
+      case NormalCat(name) => s"кот $name"
+      case BigCat(name) => s"большой кот $name"
+      case VeryBigCat(name) => s"очень большой кот $name"
+    }
 
-    implicit def boxShow[A: Show]: Show[Box[A]] = ???
+    implicit def boxShow[A: Show]: Show[Box[A]] = {
+      val innerShow: Show[A] = implicitly[Show[A]]
+
+      new Show[Box[A]] {
+        override def show(box: Box[A]): String = box match {
+          case BoxWith(value) => s"${innerShow.show(value)} в коробке"
+          case EmptyBox => "пустая коробка"
+        }
+      }
+    }
   }
 
   object ShowSyntax {
