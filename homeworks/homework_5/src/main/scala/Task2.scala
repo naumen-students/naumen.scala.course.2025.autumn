@@ -11,18 +11,43 @@ import cats.implicits._
 object Task2 extends App {
   case class RadiusVector(x: Int, y: Int)
   object RadiusVector {
-    implicit val monoid: Monoid[RadiusVector] = ???
+    implicit val monoid: Monoid[RadiusVector] = Monoid.instance(
+      RadiusVector(0, 0),
+      (a, b) => RadiusVector(a.x + b.x, a.y + b.y)
+    )
   }
-  case class DegreeAngle(angel: Double)
+
+  case class DegreeAngle private (angel: Double)
   object DegreeAngle {
-    implicit val monoid: Monoid[DegreeAngle] = ???
+    def apply(angle: Double): DegreeAngle = {
+      val normalized = ((angle % 360) + 360) % 360
+      new DegreeAngle(if (normalized == 360) 0 else normalized)
+    }
+
+    implicit val monoid: Monoid[DegreeAngle] = Monoid.instance(
+      DegreeAngle(0),
+      (a, b) => DegreeAngle(a.angel + b.angel)
+    )
   }
 
-  case class SquareMatrix[A : Monoid](values: ((A, A, A), (A, A, A), (A, A, A)))
+  case class SquareMatrix[A: Monoid](values: ((A, A, A), (A, A, A), (A, A, A)))
   object SquareMatrix {
-    implicit def monoid[A: Monoid]: Monoid[SquareMatrix[A]] = ???
-  }
+    implicit def monoid[A: Monoid]: Monoid[SquareMatrix[A]] = {
+      val zero = Monoid[A].empty
+      val emptyMatrix = SquareMatrix(((zero, zero, zero), (zero, zero, zero), (zero, zero, zero)))
 
+      Monoid.instance(
+        emptyMatrix,
+        (a, b) => SquareMatrix(
+          (
+            (a.values._1._1 |+| b.values._1._1, a.values._1._2 |+| b.values._1._2, a.values._1._3 |+| b.values._1._3),
+            (a.values._2._1 |+| b.values._2._1, a.values._2._2 |+| b.values._2._2, a.values._2._3 |+| b.values._2._3),
+            (a.values._3._1 |+| b.values._3._1, a.values._3._2 |+| b.values._3._2, a.values._3._3 |+| b.values._3._3)
+          )
+        )
+      )
+    }
+  }
   val radiusVectors = Vector(RadiusVector(0, 0), RadiusVector(0, 1), RadiusVector(-1, 1))
   Monoid[RadiusVector].combineAll(radiusVectors) // RadiusVector(-1, 2)
 

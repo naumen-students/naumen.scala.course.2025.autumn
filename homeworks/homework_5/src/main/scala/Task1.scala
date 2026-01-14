@@ -1,3 +1,5 @@
+import Task1.ShowSyntax.ShowOps
+
 /*
   Задание №1
   В задание уже описан тайп класс и синтакс для него.
@@ -17,12 +19,6 @@
   В тестах можно всегда более точно посмотреть фразы.
  */
 object Task1 extends App {
-  // Обратите внимание, что здесь type class параматрезирован контрвариантно
-  // благодаря этому инстанс Show[Cat] мы можем применить, например, к BigCat.
-  // Однако, это может быть неудобно, так как нам для каждого нового наследника придётся менять
-  // реализацию Show[Cat]. Из-за этого практически все библиотеки, которые предоставляют свои
-  // тайп классы для их использования пользователем, делают тайп классы инвариантными по параметру.
-  // Можете написать две реализации (при -А и А) и сравнить их.
   trait Show[-A] {
     def show(a: A): String
   }
@@ -45,9 +41,29 @@ object Task1 extends App {
   }
 
   object ShowInstance {
-    implicit val catShow: Show[Cat] = ???
+    private val VeryLittleCatPhrase = "очень маленький кот"
+    private val LittleCatPhrase = "маленький кот"
+    private val NormalCatPhrase = "кот"
+    private val BigCatPhrase = "большой кот"
+    private val VeryBigCatPhrase = "очень большой кот"
+    private val InBoxSuffix = "в коробке"
 
-    implicit def boxShow[A: Show]: Show[Box[A]] = ???
+    implicit val catShow: Show[Cat] = new Show[Cat] {
+      def show(cat: Cat): String = cat match {
+        case VeryLittleCat(name) => s"$VeryLittleCatPhrase $name"
+        case LittleCat(name)     => s"$LittleCatPhrase $name"
+        case NormalCat(name)     => s"$NormalCatPhrase $name"
+        case BigCat(name)        => s"$BigCatPhrase $name"
+        case VeryBigCat(name)    => s"$VeryBigCatPhrase $name"
+      }
+    }
+
+    implicit def boxShow[A: Show]: Show[Box[A]] = new Show[Box[A]] {
+      def show(box: Box[A]): String = box match {
+        case EmptyBox           => "пустая коробка"
+        case BoxWith(content)   => s"${content.show} $InBoxSuffix"
+      }
+    }
   }
 
   object ShowSyntax {
