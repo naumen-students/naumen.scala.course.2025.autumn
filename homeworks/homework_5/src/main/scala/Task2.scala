@@ -11,16 +11,56 @@ import cats.implicits._
 object Task2 extends App {
   case class RadiusVector(x: Int, y: Int)
   object RadiusVector {
-    implicit val monoid: Monoid[RadiusVector] = ???
+    implicit val monoid: Monoid[RadiusVector] = new Monoid[RadiusVector] {
+      def empty: RadiusVector = RadiusVector(0, 0)
+      def combine(x: RadiusVector, y: RadiusVector): RadiusVector =
+        RadiusVector(x.x + y.x, x.y + y.y)
+    }
   }
   case class DegreeAngle(angel: Double)
   object DegreeAngle {
-    implicit val monoid: Monoid[DegreeAngle] = ???
+    implicit val monoid: Monoid[DegreeAngle] = new Monoid[DegreeAngle] {
+      def empty: DegreeAngle = DegreeAngle(0)
+      def combine(x: DegreeAngle, y: DegreeAngle): DegreeAngle = {
+          val normalize = (angle: Double) => {
+          val bigAngle = BigDecimal(angle.toString)
+          val mod = bigAngle % 360
+          val result = if (mod < 0) mod + 360 else mod
+          result.toDouble
+        }
+
+        val normalizedX = normalize(x.angel)
+        val normalizedY = normalize(y.angel)
+        val sum = normalizedX + normalizedY
+        DegreeAngle(normalize(sum))
+      }
+    }
   }
+
 
   case class SquareMatrix[A : Monoid](values: ((A, A, A), (A, A, A), (A, A, A)))
   object SquareMatrix {
-    implicit def monoid[A: Monoid]: Monoid[SquareMatrix[A]] = ???
+    implicit def monoid[A: Monoid]: Monoid[SquareMatrix[A]] =
+      new Monoid[SquareMatrix[A]] {
+        def empty: SquareMatrix[A] = {
+          val zero = Monoid[A].empty
+          SquareMatrix(((zero, zero, zero), (zero, zero, zero), (zero, zero, zero)))
+        }
+
+        def combine(x: SquareMatrix[A], y: SquareMatrix[A]): SquareMatrix[A] = {
+          val combineElements = (t1: (A, A, A), t2: (A, A, A)) => (
+            Monoid[A].combine(t1._1, t2._1),
+            Monoid[A].combine(t1._2, t2._2),
+            Monoid[A].combine(t1._3, t2._3)
+          )
+
+          SquareMatrix((
+            combineElements(x.values._1, y.values._1),
+            combineElements(x.values._2, y.values._2),
+            combineElements(x.values._3, y.values._3)
+          ))
+        }
+      }
   }
 
   val radiusVectors = Vector(RadiusVector(0, 0), RadiusVector(0, 1), RadiusVector(-1, 1))
