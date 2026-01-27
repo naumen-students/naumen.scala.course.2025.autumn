@@ -1,0 +1,30 @@
+C:\Users\Альбина>scala
+Welcome to Scala 2.12.10 (OpenJDK 64-Bit Server VM, Java 11.0.16.1).
+Type in expressions for evaluation. Or try :help.
+
+scala> val name: String = "Albina"
+name: String = Albina
+
+scala> val str = s"Привет, Скала! Это $name"
+str: String = Привет, Скала! Это Albina
+
+scala> println(str)
+Привет, Скала! Это Albina
+
+scala> val str1 = str.replace("Привет", "Hello")
+str1: String = Hello, Скала! Это Albina
+
+scala> println(str1)
+Hello, Скала! Это Albina
+
+scala> val str2 = str1.replace("Hello", "Hola")
+str2: String = Hola, Скала! Это Albina
+
+scala> println(str2)
+Hola, Скала! Это Albina
+
+scala> val strName = str.replace(s"$name", s"${name.reverse}")
+strName: String = Привет, Скала! Это aniblA
+
+scala> println(strName)
+Привет, Скала! Это aniblA
