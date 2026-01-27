@@ -1,3 +1,8 @@
+lib/
+*.jar
+*.pom
+*__md5
+*__sha1
 /.idea
 /target
 project/target
