@@ -1,26 +1,54 @@
 import cats._
 import cats.implicits._
 
-/*
-  Задание №2
-  Всё просто, для каждого кейс класса необходимо описать логику его сложения.
-  Радиус-вектор должен складываться, как и любой другой вектор.
-  GradeAngle всегда выражает угол [0, 360).
-  SquareMatrix просто сложение квадратных матриц
- */
 object Task2 extends App {
   case class RadiusVector(x: Int, y: Int)
   object RadiusVector {
-    implicit val monoid: Monoid[RadiusVector] = ???
-  }
-  case class DegreeAngle(angel: Double)
-  object DegreeAngle {
-    implicit val monoid: Monoid[DegreeAngle] = ???
+    implicit val monoid: Monoid[RadiusVector] = new Monoid[RadiusVector] {
+      override def empty: RadiusVector = RadiusVector(0, 0)
+      override def combine(a: RadiusVector, b: RadiusVector): RadiusVector =
+        RadiusVector(a.x + b.x, a.y + b.y)
+    }
   }
 
-  case class SquareMatrix[A : Monoid](values: ((A, A, A), (A, A, A), (A, A, A)))
+  case class DegreeAngle private (angel: Double)
+  object DegreeAngle {
+    private val Turn = 360.0
+    @inline private def wrap(d: Double): Double = {
+      val k = math.floor(d / Turn)
+      d - k * Turn
+    }
+    def apply(a: Double): DegreeAngle =
+      new DegreeAngle(wrap(a))
+    implicit val monoid: Monoid[DegreeAngle] = new Monoid[DegreeAngle] {
+      override def empty: DegreeAngle = DegreeAngle(0.0)
+      override def combine(x: DegreeAngle, y: DegreeAngle): DegreeAngle =
+        new DegreeAngle(wrap(x.angel + y.angel))
+    }
+  }
+
+
+  case class SquareMatrix[A: Monoid](values: ((A, A, A), (A, A, A), (A, A, A)))
   object SquareMatrix {
-    implicit def monoid[A: Monoid]: Monoid[SquareMatrix[A]] = ???
+    implicit def monoid[A: Monoid]: Monoid[SquareMatrix[A]] =
+      new Monoid[SquareMatrix[A]] {
+        private val M = Monoid[A]
+
+        override def empty: SquareMatrix[A] = {
+          val e = M.empty
+          SquareMatrix(((e, e, e), (e, e, e), (e, e, e)))
+        }
+
+        override def combine(x: SquareMatrix[A], y: SquareMatrix[A]): SquareMatrix[A] = {
+          val ((a11, a12, a13), (a21, a22, a23), (a31, a32, a33)) = x.values
+          val ((b11, b12, b13), (b21, b22, b23), (b31, b32, b33)) = y.values
+          SquareMatrix((
+            (a11 |+| b11, a12 |+| b12, a13 |+| b13),
+            (a21 |+| b21, a22 |+| b22, a23 |+| b23),
+            (a31 |+| b31, a32 |+| b32, a33 |+| b33)
+          ))
+        }
+      }
   }
 
   val radiusVectors = Vector(RadiusVector(0, 0), RadiusVector(0, 1), RadiusVector(-1, 1))
@@ -30,20 +58,8 @@ object Task2 extends App {
   Monoid[DegreeAngle].combineAll(gradeAngles) // GradeAngle(90)
 
   val matrixes = Vector(
-    SquareMatrix(
-      (
-        (1, 2, 3),
-        (4, 5, 6),
-        (7, 8, 9)
-      )
-    ),
-    SquareMatrix(
-      (
-        (-1, -2, -3),
-        (-3, -4, -5),
-        (-7, -8, -9)
-      )
-    )
+    SquareMatrix(((1, 2, 3),(4, 5, 6),(7, 8, 9))),
+    SquareMatrix(((-1, -2, -3),(-3, -4, -5),(-7, -8, -9)))
   )
   Monoid[SquareMatrix[Int]].combineAll(matrixes)
   //  [0, 0, 0]
