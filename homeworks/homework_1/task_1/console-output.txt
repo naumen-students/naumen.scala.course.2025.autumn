@@ -1,0 +1,46 @@
+Windows PowerShell
+(C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+
+Установите последнюю версию PowerShell для новых функций и улучшения! https://aka.ms/PSWindows
+
+PS C:\Users\den27> scala
+Welcome to Scala 2.12.10 (OpenJDK 64-Bit Server VM, Java 11.0.28).
+Type in expressions for evaluation. Or try :help.
+
+scala> :paste
+// Entering paste mode (ctrl-D to finish)
+
+val name = "Kirill Tsupyshtanov";
+val greetings = List("Hello", "Hola", "Guten Tag");
+
+val original = s"Hello Scala! This is $name";
+println(original);
+
+println("\n--- Разные приветствия ---");
+greetings.foreach { greeting =>
+  println(s"$greeting Scala! This is $name")
+};
+
+val reversedName = name.reverse;
+println("\n--- С перевернутым именем ---");
+greetings.foreach { greeting =>
+  println(s"$greeting Scala! This is $reversedName")
+};
+
+// Exiting paste mode, now interpreting.
+
+Hello Scala! This is Kirill Tsupyshtanov
+
+--- Разные приветствия ---
+Hello Scala! This is Kirill Tsupyshtanov
+Hola Scala! This is Kirill Tsupyshtanov
+Guten Tag Scala! This is Kirill Tsupyshtanov
+
+--- С перевернутым именем ---
+Hello Scala! This is vonathsypusT lliriK
+Hola Scala! This is vonathsypusT lliriK
+Guten Tag Scala! This is vonathsypusT lliriK
+name: String = Kirill Tsupyshtanov
+greetings: List[String] = List(Hello, Hola, Guten Tag)
+original: String = Hello Scala! This is Kirill Tsupyshtanov
+reversedName: String = vonathsypusT lliriK
