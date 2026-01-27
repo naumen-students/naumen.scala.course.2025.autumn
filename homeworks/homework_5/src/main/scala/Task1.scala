@@ -17,12 +17,6 @@
   В тестах можно всегда более точно посмотреть фразы.
  */
 object Task1 extends App {
-  // Обратите внимание, что здесь type class параматрезирован контрвариантно
-  // благодаря этому инстанс Show[Cat] мы можем применить, например, к BigCat.
-  // Однако, это может быть неудобно, так как нам для каждого нового наследника придётся менять
-  // реализацию Show[Cat]. Из-за этого практически все библиотеки, которые предоставляют свои
-  // тайп классы для их использования пользователем, делают тайп классы инвариантными по параметру.
-  // Можете написать две реализации (при -А и А) и сравнить их.
   trait Show[-A] {
     def show(a: A): String
   }
@@ -30,24 +24,44 @@ object Task1 extends App {
   sealed trait Cat {
     def name: String
   }
+
   case class VeryLittleCat(name: String) extends Cat
+
   case class LittleCat(name: String) extends Cat
+
   case class NormalCat(name: String) extends Cat
+
   case class BigCat(name: String) extends Cat
+
   case class VeryBigCat(name: String) extends Cat
 
   sealed trait Box[+A] {
     def value: A
   }
+
   case class BoxWith[+A](value: A) extends Box[A]
+
   case object EmptyBox extends Box[Nothing] {
     override def value: Nothing = throw new Exception("Empty box!")
   }
 
   object ShowInstance {
-    implicit val catShow: Show[Cat] = ???
+    implicit val catShow: Show[Cat] = new Show[Cat] {
+      override def show(a: Cat): String = a match {
+        case VeryLittleCat(name) => s"очень маленький кот $name"
+        case LittleCat(name) => s"маленький кот $name"
+        case NormalCat(name) => s"кот $name"
+        case BigCat(name) => s"большой кот $name"
+        case VeryBigCat(name) => s"очень большой кот $name"
+      }
+    }
 
-    implicit def boxShow[A: Show]: Show[Box[A]] = ???
+    implicit def boxShow[A](implicit s: Show[A]): Show[Box[A]] = new Show[Box[A]] {
+      override def show(box: Box[A]): String = box match {
+        case EmptyBox => "пустая коробка"
+        case BoxWith(value) => s"${s.show(value)} в коробке"
+      }
+    }
   }
 
   object ShowSyntax {
