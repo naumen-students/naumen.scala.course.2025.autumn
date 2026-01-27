@@ -1,0 +1,45 @@
+PS C:\Users\Админ> scala
+Welcome to Scala 2.12.20 (Java HotSpot(TM) 64-Bit Server VM, Java 25).
+Type in expressions for evaluation. Or try :help.
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::loadLibrary has been called by org.fusesource.hawtjni.runtime.Library in an unnamed module (file:/C:/Program%20Files%20(x86)/scala/lib/jline-2.14.6.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+scala> val a = "Привет, Скала! Это Аня Дзюбан"
+a: String = Привет, Скала! Это Аня Дзюбан
+
+scala> println (a)
+Привет, Скала! Это Аня Дзюбан
+
+scala> val name = "Бонжур, Скала! Это Аня Дзюбан"
+name: String = Бонжур, Скала! Это Аня Дзюбан
+
+scala> println (name)
+Бонжур, Скала! Это Аня Дзюбан
+
+scala> val NiHao = "Нихао, Скала! Это Аня Дзюбан"
+NiHao: String = Нихао, Скала! Это Аня Дзюбан
+
+scala> println (NiHao)
+Нихао, Скала! Это Аня Дзюбан
+
+scala> val a = "Привет, Скала! Это Яна Набюзд"
+a: String = Привет, Скала! Это Яна Набюзд
+
+scala> println (a)
+Привет, Скала! Это Яна Набюзд
+
+scala> val name = "Бонжур, Скала! Это янА набюзД"
+name: String = Бонжур, Скала! Это янА набюзД
+
+scala> println (name)
+Бонжур, Скала! Это янА набюзД
+
+scala> val NiHao = "Нихао, Скала! Это набюзД атюнА"
+NiHao: String = Нихао, Скала! Это набюзД атюнА
+
+scala> println (NiHao)
+Нихао, Скала! Это набюзД атюнА
+
+scala>

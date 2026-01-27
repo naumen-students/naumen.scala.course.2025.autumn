@@ -17,6 +17,11 @@ object Exercises {
     на 3 или на 5.*/
     /*Реализовать юнит-тесты в src/test/scala для данной функции.*/
     def sumOfDivBy3Or5(iFrom: Int, iTo: Int): Long = ???
+    def sumOfDivBy3Or5(iFrom: Int, iTo: Int): Long = {
+        var sum = 0;
+        for {i <- iFrom to iTo if i % 3 == 0 || i % 5 == 0} sum += i
+        sum
+    }
 
 
 
@@ -26,7 +31,14 @@ object Exercises {
     Число 98 можно разложить на множители 1 * 2 * 7 * 7, результат выполнения функции => Seq(2, 7).*/
     /*Реализовать юнит-тесты в src/test/scala для данной функции.*/
     def primeFactor(number: Int): Seq[Int] = ???
-
+    def primeFactor(number: Int): Seq[Int] = {
+        def factors(n: Int, divisor: Int, acc: Set[Int]): Set[Int] = {
+            if (n <= 1) acc
+            else if (n % divisor == 0) factors(n / divisor, divisor, acc + divisor)
+            else factors(n, divisor + 1, acc)
+        }
+        factors(number, 2, Set()).toSeq
+    }
 
 
     /*ЗАДАНИЕ III*/
@@ -49,6 +61,14 @@ object Exercises {
     def sumCosines(leftVec0: Vector2D, leftVec1: Vector2D, rightVec0: Vector2D, rightVec1: Vector2D): Double =
         sumByFunc(leftVec0, leftVec1, cosBetween, rightVec0, rightVec1)
     */
+        def sumByFunc(leftVec0: Vector2D, leftVec1: Vector2D, func: (Vector2D, Vector2D) => Double, rightVec0: Vector2D, rightVec1: Vector2D) =
+        func(leftVec0, leftVec1) + func(rightVec0, rightVec1)
+
+        def sumScalars(leftVec0: Vector2D, leftVec1: Vector2D, rightVec0: Vector2D, rightVec1: Vector2D): Double =
+        sumByFunc(leftVec0, leftVec1, scalar, rightVec0, rightVec1)
+
+        def sumCosines(leftVec0: Vector2D, leftVec1: Vector2D, rightVec0: Vector2D, rightVec1: Vector2D): Double =
+        sumByFunc(leftVec0, leftVec1, cosBetween, rightVec0, rightVec1)
 
 
 
@@ -71,6 +91,13 @@ object Exercises {
             "Chrome" ->   (3,   7.18),   "Cesium" ->    (7,   1.873), "Zirconium" -> (3,   6.45)
         )
 
-    def sortByHeavyweight(ballsArray: Map[String, (Int, Double)] = balls): Seq[String] = ???
-
+    def sortByHeavyweight(ballsArray: Map[String, (Int, Double)] = balls): Seq[String] =
+        ballsArray.toSeq
+          .map { case (name, (radius, density)) =>
+              val volume = (4.0 / 3.0) * Math.PI * Math.pow(radius, 3)
+              val mass = volume * density
+              (name, mass)
+          }
+          .sortBy(_._2)
+          .map(_._1)
 }
