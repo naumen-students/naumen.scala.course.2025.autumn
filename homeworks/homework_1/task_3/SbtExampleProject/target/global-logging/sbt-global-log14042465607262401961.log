@@ -1,0 +1,15 @@
+[debug] > Exec(s, None, None)
+[error] Not a valid command: s
+[error] Expected 'sbtRebootNetwork'
+[error] Expected 'show'
+[error] Not a valid project ID: s
+[error] Expected ':'
+[error] Not a valid key: s
+[error] Expected 'sbtPromptChannel'
+[error] Expected 'sbtRebootImpl'
+[error] Expected 'sbtReportResult'
+[error] Expected 'sbtMapExec'
+[error] Expected 'sbtCompleteExec'
+[error] s
+[error]  ^
+[debug] > Exec(idea-shell, None, None)
