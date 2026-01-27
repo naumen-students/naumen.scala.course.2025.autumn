@@ -1,36 +1,36 @@
 import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
 
 object Utils {
-    class PhoneBase(private val phones: mutable.ListBuffer[String]) {
-        def insert(phone: String): Unit = phones += phone
-        def list(): List[String] = phones.toList
-        def delete(phone: String): Unit = phones.filter(_ != phone)
+  class PhoneBook(private val phoneNumbers: mutable.ListBuffer[String] = new ListBuffer[String]) {
+    def insert(phoneNumber: String): Unit = phoneNumbers += phoneNumber
+    def list(): List[String] = phoneNumbers.toList
+    def delete(phoneNumber: String): Unit = phoneNumbers.filter(_ != phoneNumber)
+  }
 
+  def isValidPhoneNumber(phoneNumber: String): Boolean =
+    phoneNumber.matches("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$")
+
+  class SimplePhoneService(phoneBook: PhoneBook) {
+    def findPhoneNumber(phoneNumber: String): String = {
+      val filteredPhoneNumbers = phoneBook.list().filter(_ == phoneNumber)
+      if (filteredPhoneNumbers.nonEmpty)
+        filteredPhoneNumbers.head
+      else
+        null
     }
 
-    def checkPhoneNumber(num: String): Boolean = num.matches("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$")
-
-    class SimplePhoneService(phonesBase: PhoneBase) {
-
-        def findPhoneNumber(num: String): String = {
-            val resulNums = phonesBase.list().filter(_ == num)
-            if (resulNums.isEmpty)
-                null
-            else
-                resulNums.head
-        }
-
-        def addPhoneToBase(phone: String): Unit = {
-            if (checkPhoneNumber(phone))
-                phonesBase.insert(phone)
-            else
-                throw new InternalError("Invalid phone string")
-        }
-
-        def deletePhone(phone: String): Unit = phonesBase.delete(phone)
+    def addPhoneToBase(phoneNumber: String): Unit = {
+      if (isValidPhoneNumber(phoneNumber))
+        phoneBook.insert(phoneNumber)
+      else
+        throw new InternalError("Invalid phone string")
     }
 
-    trait ChangePhoneService {
-        def changePhone(oldPhone: String, newPhone: String): String
-    }
+    def deletePhone(phoneNumber: String): Unit = phoneBook.delete(phoneNumber)
+  }
+
+  trait ChangePhoneService {
+    def changePhone(oldPhoneNumber: String, newPhoneNumber: String): String
+  }
 }
