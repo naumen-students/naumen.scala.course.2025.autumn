@@ -1,0 +1,28 @@
+PS C:\Users\Admin> amm
+Loading...
+Welcome to the Ammonite Repl 3.0.4 (Scala 3.7.3 Java 21.0.4)
+@ def createMessage(hello: String, name: String): String = s"$hello Scala! This is $name"
+defined function createMessage
+
+@ val reversedString = (s: String) => s.reverse
+reversedString: String => String = ammonite.$sess.cmd1$$$Lambda/0x000001f7376da400@5da7cee2
+
+@ val myName = "Vitaly Karpov"
+myName: String = "Vitaly Karpov"
+
+@ lazy val helloWords = Array("Hello", "Hola", "Bonjour", "Guten tag")
+helloWords: Array[String] = <lazy>
+
+@ helloWords.foreach(helloWord => {println(createMessage(helloWord, myName)); println(createMessage(helloWord, reversedString(myName)))})
+Hello Scala! This is Vitaly Karpov
+Hello Scala! This is vopraK ylatiV
+Hola Scala! This is Vitaly Karpov
+Hola Scala! This is vopraK ylatiV
+Bonjour Scala! This is Vitaly Karpov
+Bonjour Scala! This is vopraK ylatiV
+Guten tag Scala! This is Vitaly Karpov
+Guten tag Scala! This is vopraK ylatiV
+
+
+@
+Bye!
