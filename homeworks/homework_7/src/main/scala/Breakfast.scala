@@ -1,7 +1,7 @@
 package ru.dru
 
 import zio.CanFail.canFailAmbiguous1
-import zio.{Duration, Exit, Fiber, Scope, ZIO, ZIOApp, ZIOAppArgs, ZIOAppDefault, durationInt}
+import zio.{Clock, Duration, Exit, Fiber, Scope, ZIO, ZIOApp, ZIOAppArgs, ZIOAppDefault, durationInt}
 
 import java.time.LocalDateTime
 import scala.concurrent.TimeoutException
@@ -32,7 +32,35 @@ object Breakfast extends ZIOAppDefault {
   def makeBreakfast(eggsFiringTime: Duration,
                     waterBoilingTime: Duration,
                     saladInfoTime: SaladInfoTime,
-                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = ???
+                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = {
+    def createTask(duration: Duration): ZIO[Any, Throwable, LocalDateTime] =
+      ZIO.sleep(duration) *> Clock.localDateTime.mapError(_ => new Exception())
+    val waterTask: ZIO[Any, Throwable, LocalDateTime] = createTask(waterBoilingTime)
+    val eggsTask: ZIO[Any, Throwable, LocalDateTime] = createTask(eggsFiringTime)
+
+    val saladTask: ZIO[Any, Throwable, LocalDateTime] =
+      createTask(saladInfoTime.cucumberTime) *>
+        createTask(saladInfoTime.tomatoTime) *>
+        Clock.localDateTime.mapError(_ => new Exception())
+
+    val teaTask: ZIO[Any, Throwable, LocalDateTime] = createTask(teaBrewingTime)
+
+    for {
+      waterFiber <- waterTask.fork
+      eggsFiber <- eggsTask.fork
+      saladFiber <- saladTask.fork
+      waterTime <- waterFiber.join
+      teaFiber <- teaTask.fork
+      eggsTime <- eggsFiber.join
+      saladTime <- saladFiber.join
+      teaTime <- teaFiber.join
+    } yield Map(
+      "eggs" -> eggsTime,
+      "water" -> waterTime,
+      "saladWithSourCream" -> saladTime,
+      "tea" -> teaTime
+    )
+  }
 
 
 
