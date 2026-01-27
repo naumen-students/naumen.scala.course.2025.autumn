@@ -12,21 +12,44 @@ import scala.concurrent.duration.DurationInt
   Обязательно использовать функцию mapReduce.
  */
 object Task3 extends App {
-  def mapReduce[A, B: Monoid](values: Vector[A])(func: A => B): Future[B] = {
-    val numCores = Runtime.getRuntime.availableProcessors
-    val groupSize = (1.0 * values.size / numCores).ceil.toInt
-    values
-      .grouped(groupSize)
-      .toVector
-      .traverse(group => Future(group.foldMap(func)))
-      .map(_.combineAll)
-  }
-
-  case class Count(word: String, count: Int)
-  case class WordsCount(count: Seq[Count])
-  object WordsCount {
-    implicit val monoid: Monoid[WordsCount] = ???
-  }
-
-  def countWords(lines: Vector[String]): WordsCount = ???
+    def mapReduce[A, B: Monoid](values: Vector[A])(func: A => B): Future[B] = {
+        val numCores = Runtime.getRuntime.availableProcessors
+        val groupSize = (1.0 * values.size / numCores).ceil.toInt
+        values
+                .grouped(groupSize)
+                .toVector
+                .traverse(group => Future(group.foldMap(func)))
+                .map(_.combineAll)
+    }
+    
+    case class Count(word: String, count: Int)
+    case class WordsCount(count: Seq[Count])
+    object WordsCount {
+        implicit val monoid: Monoid[WordsCount] = new Monoid[WordsCount] {
+            def empty: WordsCount = WordsCount(Seq.empty)
+            
+            def combine(a: WordsCount, b: WordsCount): WordsCount = {
+                val combinedMap = (a.count ++ b.count)
+                        .groupBy(_.word)
+                        .map { case (word, counts) =>
+                            Count(word, counts.map(_.count).sum)
+                        }
+                        .toSeq
+                WordsCount(combinedMap)
+            }
+        }
+    }
+    
+    def countWords(lines: Vector[String]): WordsCount = {
+        Await.result(
+            mapReduce(lines) { line =>
+                val words = line.split("\\s+").filter(_.nonEmpty)
+                val wordCounts = words.groupBy(identity).map { case (word, occurrences) =>
+                    Count(word, occurrences.length)
+                }.toSeq
+                WordsCount(wordCounts)
+            },
+            10.seconds
+        )
+    }
 }
