@@ -1,0 +1,56 @@
+C:\Users\lopar>scala
+Welcome to Scala 3.7.3 (17.0.16, Java OpenJDK 64-Bit Server VM).
+Type in expressions for evaluation. Or try :help.
+
+scala> val a = "Hello, Scala! This is Vlad Loparev"
+val a: String = Hello, Scala! This is Vlad Loparev
+
+scala> println(a)
+Hello, Scala! This is Vlad Loparev
+
+scala> var greet = "Hello"
+var greet: String = Hello
+
+scala> val name = "Vlad Loparev"
+val name: String = Vlad Loparev
+
+scala> println(s"$greet, Scala! This is $name")
+Hello, Scala! This is Vlad Loparev
+
+scala> greet = "Hola"
+greet: String = Hola
+
+scala> println(s"$greet, Scala! This is $name")
+Hola, Scala! This is Vlad Loparev
+
+scala> greet = "Guten tag"
+greet: String = Guten tag
+
+scala> println(s"$greet, Scala! This is $name")
+Guten tag, Scala! This is Vlad Loparev
+
+scala> def greeting(greet: String, name: String): Unit = {println(s"$greet, Scala! This is $name")}
+def greeting(greet: String, name: String): Unit
+
+scala> greeting("Hello", name)
+Hello, Scala! This is Vlad Loparev
+
+scala> def greeting(greet: String, name: String): Unit = {println(s"$greet, Scala! This is $name.reverse")}
+def greeting(greet: String, name: String): Unit
+
+scala> greeting("Hello", name)
+Hello, Scala! This is Vlad Loparev.reverse
+
+scala> def greeting(greet: String, name: String): Unit = {println(s"$greet, Scala! This is ${name.reverse}")}
+def greeting(greet: String, name: String): Unit
+
+scala> greeting("Hello", name)
+Hello, Scala! This is verapoL dalV
+
+scala> greeting("Hola", name)
+Hola, Scala! This is verapoL dalV
+
+scala> greeting("Guten tag", name)
+Guten tag, Scala! This is verapoL dalV
+
+scala>
