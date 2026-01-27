@@ -1,0 +1,47 @@
+my_dear_doctor@my-dear-doctor:~/Programming/Naumen/Scala$ scala
+Welcome to Scala 3.7.3 (21.0.8, Java OpenJDK 64-Bit Server VM).
+Type in expressions for evaluation. Or try :help.
+                                                                                                                                        
+scala> val greeting = "Привет"
+val greeting: String = Привет
+                                                                                                                                        
+scala> val name = "Андрей Киселев"
+val name: String = Андрей Киселев
+                                                                                                                                        
+scala> val greetingFull = s"${greeting}, Скала! Это ${name}"
+val greetingFull: String = Привет, Скала! Это Андрей Киселев
+                                                                                                                                        
+scala> println(greetingFull)
+Привет, Скала! Это Андрей Киселев
+                                                                                                                                        
+scala> val greeting = "Hello"
+val greeting: String = Hello
+                                                                                                                                        
+scala> val greetingFull = s"${greeting}, Скала! Это ${name}"
+val greetingFull: String = Hello, Скала! Это Андрей Киселев
+                                                                                                                                        
+scala> println(greetingFull)
+Hello, Скала! Это Андрей Киселев
+                                                                                                                                        
+scala> val greeting = "Ni Hao"
+val greeting: String = Ni Hao
+                                                                                                                                        
+scala> val greetingFull = s"${greeting}, Скала! Это ${name}"
+val greetingFull: String = Ni Hao, Скала! Это Андрей Киселев
+                                                                                                                                        
+scala> println(greetingFull)
+Ni Hao, Скала! Это Андрей Киселев
+                                                                                                                                        
+scala> val nameReversed = name.reverse
+val nameReversed: String = велесиК йерднА
+                                                                                                                                        
+scala> println(nameReversed)
+велесиК йерднА
+                                                                                                                                        
+scala> val greetingFull = s"${greeting}, Скала! Это ${nameReversed}"
+val greetingFull: String = Ni Hao, Скала! Это велесиК йерднА
+                                                                                                                                        
+scala> println(greetingFull)
+Ni Hao, Скала! Это велесиК йерднА
+                                                                                                                                        
+scala>
