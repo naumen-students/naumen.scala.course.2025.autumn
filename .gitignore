@@ -1,1 +1,4 @@
 .idea
+.metals
+.vscode
+.scalafmt.conf
