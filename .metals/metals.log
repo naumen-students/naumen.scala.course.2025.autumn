@@ -1,0 +1,31 @@
+2025.09.24 15:00:44 INFO  no build target found for C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 15:00:46 WARN  Could not find semantic tokens for: file:///C:/Users/anaas/OneDrive/Рабочий%20стол/гит/naumen.scala.course.2025.autumn/homeworks/homework_1/task_3/hello-world-template/build.sbt
+2025.09.24 15:00:50 INFO  Running List(C:\Users\anaas\AppData\Local\Coursier\data\bin\scala-cli.BAT, setup-ide, C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn)
+2025.09.24 15:00:50 INFO  Scala CLI: [error]  C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn: input file not found
+2025.09.24 15:00:50 INFO  Scala CLI: Try viewing the relevant help to see the list of available sub-commands and options.
+2025.09.24 15:00:50 INFO  Scala CLI:   C:\Users\anaas\AppData\Local\Coursier\data\bin\.scala-cli.aux.exe setup-ide --help
+2025.09.24 15:00:50 WARN  no build tool detected in workspace 'C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2025.09.24 15:00:50 WARN  Build server is not auto-connectable.
+2025.09.24 15:00:50 INFO  no build target found for C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 15:00:50 WARN  no build target for: C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\hello-world-template\build.sbt
+2025.09.24 15:00:50 INFO  no build target found for C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 15:00:50 WARN  Could not find semantic tokens for: file:///C:/Users/anaas/OneDrive/Рабочий%20стол/гит/naumen.scala.course.2025.autumn/homeworks/homework_1/task_3/hello-world-template/build.sbt
+2025.09.24 15:01:10 INFO  no build target found for C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 15:01:10 WARN  no build target for: C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\hello-world-template\src\main\scala\Main.scala
+2025.09.24 15:01:10 INFO  no build target found for C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 15:01:10 INFO  no build target found for C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 15:01:11 INFO  no build target found for C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 15:01:12 INFO  time: code lens generation in 1.4s
+2025.09.24 15:01:14 INFO  no build target found for C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 15:01:14 INFO  no build target found for C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 15:01:58 INFO  no build target found for c:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 15:02:03 WARN  no build target for: C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\src\main\scala\Main.scala
+2025.09.24 15:02:03 INFO  no build target found for C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 15:02:03 INFO  no build target found for C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 15:02:03 INFO  no build target found for C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 15:02:03 INFO  no build target found for C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 15:02:03 INFO  no build target found for C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 15:02:04 INFO  no build target found for C:\Users\anaas\OneDrive\Рабочий стол\гит\naumen.scala.course.2025.autumn\homeworks\homework_1\task_3\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 15:02:44 INFO  Shutting down server
+2025.09.24 15:02:44 INFO  shutting down Metals
+2025.09.24 15:02:44 INFO  Exiting server

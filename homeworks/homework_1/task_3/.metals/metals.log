@@ -1,0 +1,74 @@
+2025.09.24 14:45:47 INFO  Started: Metals version 1.6.2 in folders 'C:\Users\anaas\projects\hello-world-template' for client Visual Studio Code 1.104.1.
+2025.09.24 14:45:48 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+сент. 24, 2025 2:46:16 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+сент. 24, 2025 2:46:16 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1
+сент. 24, 2025 2:46:16 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 6
+сент. 24, 2025 2:46:16 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2
+2025.09.24 14:46:16 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:46:16 WARN  no build target for: C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala
+сент. 24, 2025 2:46:16 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 8
+2025.09.24 14:46:16 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:46:16 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:46:22 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:48:28 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:50:04 WARN  no build target for: C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala
+2025.09.24 14:50:04 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:50:04 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:50:04 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:50:04 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:50:28 WARN  no build target for: C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala
+2025.09.24 14:50:28 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:50:28 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:50:28 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:50:38 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:51:10 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:51:10 WARN  Could not find semantic tokens for: file:///C:/Users/anaas/projects/hello-world-template/build.sbt
+2025.09.24 14:51:20 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:51:21 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:51:21 WARN  Could not find semantic tokens for: file:///C:/Users/anaas/projects/hello-world-template/build.sbt
+2025.09.24 14:51:20 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:51:20 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:51:21 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:51:21 WARN  Could not find semantic tokens for: file:///C:/Users/anaas/projects/hello-world-template/build.sbt
+2025.09.24 14:51:22 WARN  no build target for: C:\Users\anaas\projects\hello-world-template\build.sbt
+2025.09.24 14:51:22 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:51:22 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:51:21 WARN  Could not find semantic tokens for: file:///C:/Users/anaas/projects/hello-world-template/build.sbt
+2025.09.24 14:51:22 WARN  no build target for: C:\Users\anaas\projects\hello-world-template\build.sbt
+2025.09.24 14:51:22 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:51:22 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:51:22 WARN  Could not find semantic tokens for: file:///C:/Users/anaas/projects/hello-world-template/build.sbt
+2025.09.24 14:51:26 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:51:26 WARN  no build target for: C:\Users\anaas\projects\hello-world-template\build.sbt
+2025.09.24 14:51:26 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:51:26 WARN  Could not find semantic tokens for: file:///C:/Users/anaas/projects/hello-world-template/build.sbt
+2025.09.24 14:51:27 WARN  no build target for: C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala
+2025.09.24 14:51:27 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:51:27 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:51:27 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:52:02 WARN  no build target for: C:\Users\anaas\projects\hello-world-template\build.sbt
+2025.09.24 14:52:02 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:52:02 WARN  Could not find semantic tokens for: file:///C:/Users/anaas/projects/hello-world-template/build.sbt
+2025.09.24 14:52:02 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:52:03 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:52:03 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:52:04 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:52:04 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:52:04 WARN  Could not find semantic tokens for: file:///C:/Users/anaas/projects/hello-world-template/build.sbt
+2025.09.24 14:52:04 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:52:04 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:52:04 WARN  Could not find semantic tokens for: file:///C:/Users/anaas/projects/hello-world-template/build.sbt
+2025.09.24 14:52:05 WARN  no build target for: C:\Users\anaas\projects\hello-world-template\build.sbt
+2025.09.24 14:52:05 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:52:07 WARN  no build target for: C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala
+2025.09.24 14:52:07 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:52:07 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 14:52:07 INFO  no build target found for C:\Users\anaas\projects\hello-world-template\src\main\scala\Main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.09.24 15:00:24 INFO  Shutting down server
+2025.09.24 15:00:24 INFO  shutting down Metals
+2025.09.24 15:00:24 INFO  Exiting server
