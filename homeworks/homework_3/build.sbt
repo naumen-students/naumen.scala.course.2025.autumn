@@ -1,9 +1,8 @@
 name := "Lecture4"
 
-version := "0.1"
+version := "1.0.0"
+scalaVersion := "2.13.12"
 
-scalaVersion := "2.12.10"
-
-libraryDependencies += "com.lihaoyi" %% "utest" % "0.5.3" % "test"
+libraryDependencies += "com.lihaoyi" %% "utest" % "0.8.1" % Test
 
 testFrameworks += new TestFramework("utest.runner.Framework")
