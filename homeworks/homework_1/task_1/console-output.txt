@@ -1,0 +1,57 @@
+Welcome to Scala 2.12.10 (OpenJDK 64-Bit Server VM, Java 11.0.28).
+Type in expressions for evaluation. Or try :help.
+
+scala> println("Hello, Scala! This is Sergei Dagaev")
+Hello, Scala! This is Sergei Dagaev
+
+scala> val meet = "Hello"
+meet: String = Hello
+
+scala> val name = "Sergei Dagaev"
+name: String = Sergei Dagaev
+
+scala> println(s"$meet , Scala! This is $name")
+Hello , Scala! This is Sergei Dagaev
+
+scala> val meets = list("Hello", "Holla", "Guten tag")
+<console>:11: error: not found: value list
+       val meets = list("Hello", "Holla", "Guten tag")
+                   ^
+
+scala> val meets = List("Hello", "Holla", "Guten tag")
+meets: List[String] = List(Hello, Holla, Guten tag)
+
+scala> meets.foreach { g =>
+     | println(s"$g, Scala! This is $name")
+     | }
+Hello, Scala! This is Sergei Dagaev
+Holla, Scala! This is Sergei Dagaev
+Guten tag, Scala! This is Sergei Dagaev
+
+scala> val reversedName = name.reverse
+reversedName: String = veagaD iegreS
+
+scala> meets.foreach { g =>
+     | println(s"$g, Scala! This is $reversedName")
+     | }
+Hello, Scala! This is veagaD iegreS
+Holla, Scala! This is veagaD iegreS
+Guten tag, Scala! This is veagaD iegreS
+
+scala> def met(meet: String, person: String): Unit = {
+     | println(s"$meet, Scala! This is $person")
+     | }
+met: (meet: String, person: String)Unit
+
+scala> meets.foreach { g =>
+     | met(g, name)
+     | met(g, name.reverse)
+     | }
+Hello, Scala! This is Sergei Dagaev
+Hello, Scala! This is veagaD iegreS
+Holla, Scala! This is Sergei Dagaev
+Holla, Scala! This is veagaD iegreS
+Guten tag, Scala! This is Sergei Dagaev
+Guten tag, Scala! This is veagaD iegreS
+
+scala>
