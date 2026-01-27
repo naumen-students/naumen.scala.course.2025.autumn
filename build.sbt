@@ -1,4 +1,4 @@
-name := "Lecture2"
+name := "Lecture4"
 
 version := "0.1"
 
