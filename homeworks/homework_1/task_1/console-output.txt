@@ -1,0 +1,26 @@
+PS C:\Users\evluc\Desktop\scalanaumen> scala
+Welcome to Scala 2.12.10 (OpenJDK 64-Bit Server VM, Java 1.8.0_462).
+Type in expressions for evaluation. Or try :help.
+
+scala> val name = "Makar Pavletsov"
+name: String = Makar Pavletsov
+
+scala> val greetings = s"Hello Scala! This is $name"
+greetings: String = Hello Scala! This is Makar Pavletsov
+
+scala> print(greetings)
+Hello Scala! This is Makar Pavletsov
+scala> val greetings = List("Hola","Guten tag","Hei")
+greetings: List[String] = List(Hola, Guten tag, Hei)
+
+scala> greetings.foreach(greet => println(s"$greet Scala! This is $name"))
+Hola Scala! This is Makar Pavletsov
+Guten tag Scala! This is Makar Pavletsov
+Hei Scala! This is Makar Pavletsov
+
+scala> greetings.foreach(greet => println(s"$greet Scala! This is ${name.reverse}"))
+Hola Scala! This is vostelvaP rakaM
+Guten tag Scala! This is vostelvaP rakaM
+Hei Scala! This is vostelvaP rakaM
+
+scala>
