@@ -1,0 +1,9 @@
+[debug] Packaging D:\IdeaProjects\untitled\untitled1\target\scala-3.3.6\untitled1_3-0.1.0-SNAPSHOT.jar ...
+[debug] Input file mappings:
+[debug] 	Main$.class
+[debug] 	  D:\IdeaProjects\untitled\untitled1\target\scala-3.3.6\classes\Main$.class
+[debug] 	Main.class
+[debug] 	  D:\IdeaProjects\untitled\untitled1\target\scala-3.3.6\classes\Main.class
+[debug] 	Main.tasty
+[debug] 	  D:\IdeaProjects\untitled\untitled1\target\scala-3.3.6\classes\Main.tasty
+[debug] Done packaging.
