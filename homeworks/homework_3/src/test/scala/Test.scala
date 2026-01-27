@@ -73,5 +73,34 @@ object Test extends TestSuite {
                 }
             }
         }
+        'test_referenceCell2 - {
+            val table = new Table(3, 3)
+
+            val cellRef01 = new ReferenceCell(0, 1, table)
+            val cellRef02 = new ReferenceCell(1, 2, table)
+            val cellRef12 = new ReferenceCell(2, 1, table)
+            val cellRef21 = new ReferenceCell(2, 2, table)
+            val cellRef22 = new ReferenceCell(1, 2, table)
+            table.setCell(0, 1, cellRef01)
+            table.setCell(0, 2, cellRef02)
+            table.setCell(1, 2, cellRef12)
+            table.setCell(2, 1, cellRef21)
+            table.setCell(2, 2, cellRef22)
+            for (i <- 0 until 9) {
+                val value = table.getCell(i / 3, i % 3).get.toString
+                i match {
+                    case 0 => assert(value == "empty")
+                    case 1 => assert(value == "cyclic")
+                    case 2 => assert(value == "cyclic")
+                    case 3 => assert(value == "empty")
+                    case 4 => assert(value == "empty")
+                    case 5 => assert(value == "cyclic")
+                    case 6 => assert(value == "empty")
+                    case 7 => assert(value == "cyclic")
+                    case 8 => assert(value == "cyclic")
+                    case _ => assert(false)
+                }
+            }
+        }
     }
 }
